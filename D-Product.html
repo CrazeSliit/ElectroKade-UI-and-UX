@@ -264,7 +264,7 @@ class Component extends DCLogic {
   componentWillUnmount() { clearTimeout(this.tt); }
   renderVals() {
     const S = this.state, set = (o) => this.setState(o);
-    const IMG = {"blue": "assets/products/galaxy-a55.webp", "navy": "assets/products/galaxy-s24-fe.webp", "lemon": "assets/products/galaxy-a16.webp", "front": "assets/products/galaxy-a55-front.webp", "cable": "assets/products/baseus-cable.webp", "case": "assets/products/a55-clear-case.webp"};
+    const IMG = {"blue": "assets/products/galaxy-a55.webp", "navy": "assets/products/galaxy-a55-navy.webp", "lemon": "assets/products/galaxy-a55-lemon.webp", "back": "assets/products/galaxy-a55-back.webp", "front": "assets/products/galaxy-a55-front.webp", "cable": "assets/products/baseus-cable.webp", "case": "assets/products/a55-clear-case.webp"};
     const colors = [
       { name: 'Awesome Iceblue', hex: '#AFCBEA', img: IMG.blue },
       { name: 'Awesome Navy', hex: '#2E333A', img: IMG.navy },
@@ -276,7 +276,7 @@ class Component extends DCLogic {
     ];
     const fmt = (n) => 'Rs. ' + n.toLocaleString('en-US');
     const st = storages[S.storage];
-    const gallery = [colors[S.color].img, IMG.front, IMG.cable, IMG.case];
+    const gallery = [colors[S.color].img, IMG.front, IMG.back, IMG.case];
     const labels = ['Back view', 'Front view', 'In the box', 'Matching case'];
     const tabs = [['desc', 'Description'], ['spec', 'Specifications'], ['box', "What's in the Box"], ['war', 'Warranty'], ['rev', 'Reviews (212)']];
     const D = ['Colombo', 'Gampaha', 'Kalutara', 'Kandy', 'Galle', 'Matara', 'Kurunegala', 'Negombo', 'Jaffna', 'Anuradhapura', 'Ratnapura', 'Badulla', 'Trincomalee', 'Batticaloa', 'Nuwara Eliya'];
