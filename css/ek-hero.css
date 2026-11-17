@@ -1,0 +1,50 @@
+/* Home hero carousel (home.html + M-Home.html) */
+.ek-hero { touch-action: pan-y; user-select: none; }
+.ek-hero-slide {
+  position: absolute; inset: 0; box-sizing: border-box;
+  opacity: 0; visibility: hidden;
+  transition: opacity .55s ease, visibility 0s linear .55s;
+}
+.ek-hero-slide.is-active { opacity: 1; visibility: visible; transition: opacity .55s ease; z-index: 1; }
+.ek-hero:not(.ek-hero-m) .ek-hero-slide { display: flex; align-items: center; padding: 36px 72px 52px; }
+.ek-hero:not(.ek-hero-m) .ek-hero-copy { gap: 12px !important; }
+.ek-hero:not(.ek-hero-m) .ek-hero-dots { bottom: 22px !important; }
+
+/* keep arrows & dots above slides */
+.ek-hero > button { z-index: 4; }
+
+/* entrance choreography for the active slide */
+.ek-hero-slide.is-active .ek-hero-copy > * { animation: ek-hero-up .6s cubic-bezier(.22,.8,.24,1) both; }
+.ek-hero-slide.is-active .ek-hero-copy > :nth-child(2) { animation-delay: .06s; }
+.ek-hero-slide.is-active .ek-hero-copy > :nth-child(3) { animation-delay: .12s; }
+.ek-hero-slide.is-active .ek-hero-copy > :nth-child(4) { animation-delay: .18s; }
+.ek-hero-slide.is-active .ek-hero-copy > :nth-child(5) { animation-delay: .22s; }
+.ek-hero-slide.is-active .ek-hero-copy > :nth-child(6) { animation-delay: .26s; }
+.ek-hero-slide.is-active .ek-hero-art { animation: ek-hero-art .8s cubic-bezier(.22,.8,.24,1) .05s both; }
+@keyframes ek-hero-up { from { opacity: 0; translate: 0 18px; } }
+@keyframes ek-hero-art { from { opacity: 0; translate: 48px 0; scale: .94; } }
+
+/* dots */
+.ek-hero-dot {
+  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(255,255,255,.35); transition: width .35s cubic-bezier(.22,.8,.24,1), background .25s ease;
+  position: relative; overflow: hidden;
+}
+.ek-hero-dot:hover { background: rgba(255,255,255,.6); }
+.ek-hero-dot.is-active { width: 28px; background: rgba(255,255,255,.35); }
+/* progress fill shows time until the next slide */
+.ek-hero-dot.is-active::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: #FFFFFF;
+  transform-origin: 0 50%; animation: ek-hero-fill var(--ek-hero-delay, 6s) linear both;
+}
+.ek-hero.is-paused .ek-hero-dot.is-active::after { animation-play-state: paused; }
+@keyframes ek-hero-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.ek-hero-m .ek-hero-dot { width: 7px; height: 7px; }
+.ek-hero-m .ek-hero-dot.is-active { width: 22px; }
+.ek-hero-dot:focus-visible { outline: 2px solid #7CC8FF; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ek-hero-slide, .ek-hero-slide.is-active { transition: none; }
+  .ek-hero-slide.is-active .ek-hero-copy > *, .ek-hero-slide.is-active .ek-hero-art { animation: none; }
+  .ek-hero-dot.is-active::after { animation: none; transform: none; }
+}

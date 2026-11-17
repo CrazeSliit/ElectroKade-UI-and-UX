@@ -17,7 +17,7 @@
 
   function skip(el) {
     // never animate chrome that should feel instant: headers, navs, fixed/sticky bars, overlays
-    return !!el.closest('header, nav, footer, [role="dialog"], [aria-modal="true"]') ||
+    return !!el.closest('header, nav, footer, .ek-hero, [role="dialog"], [aria-modal="true"]') ||
            /fixed|sticky/.test(el.style.position);
   }
   function tag(el, scale) {
