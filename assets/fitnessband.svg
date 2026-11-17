@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+<defs><linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E9DF1"/><stop offset="1" stop-color="#0B6FB5"/></linearGradient>
+<radialGradient id="sh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#0F1419" stop-opacity=".22"/><stop offset="1" stop-color="#0F1419" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="200" cy="356" rx="130" ry="14" fill="url(#sh)"/>
+<ellipse cx="200" cy="210" rx="120" ry="110" fill="none" stroke="url(#band)" stroke-width="34"/>
+<ellipse cx="200" cy="210" rx="120" ry="110" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="2"/>
+<rect x="160" y="70" width="80" height="150" rx="40" fill="#14171B" transform="rotate(0)"/>
+<rect x="168" y="80" width="64" height="130" rx="32" fill="#05070A"/>
+<text x="200" y="138" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">10</text>
+<text x="200" y="162" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">09</text>
+<rect x="186" y="176" width="28" height="5" rx="2.5" fill="#17BF63"/>
+</svg>

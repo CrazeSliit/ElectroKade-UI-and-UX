@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment success (mobile)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Open Sans', system-ui, sans-serif;color:#0F1419;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0C6DB0;text-decoration:none}a:hover{color:#0F1419}
+button,input,select,textarea{font-family:inherit}
+input::placeholder,textarea::placeholder{color:#7A8691}
+.ek-card{transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease}
+.ek-card:hover{box-shadow:0 10px 30px rgba(15,20,25,.08);transform:translateY(-2px);border-color:#CFDDE6}
+.ek-btn{transition:filter .15s ease, transform .15s ease}
+.ek-btn:hover{filter:brightness(.94)}.ek-btn:active{transform:scale(.98)}
+.ek-link:hover{color:#0C6DB0}
+.ek-field:focus{outline:none;border-color:#1E9DF1;box-shadow:0 0 0 3px rgba(30,157,241,.18)}
+@keyframes ekspin{to{transform:rotate(360deg)}}
+@keyframes ekpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+@keyframes ekdraw{to{stroke-dashoffset:0}}
+@keyframes ekshimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+@keyframes ekflip{from{opacity:.6}to{opacity:1}}
+</style>
+
+<style>
+body.desktop #app > div { min-height: 0 !important; }
+body.mobile { background: #E9EDF1; }
+body.mobile #app { width: 390px; margin: 24px auto 48px; background: #FFFFFF; border-radius: 36px; box-shadow: 0 30px 80px rgba(15,20,25,.18); transform: translateZ(0); overflow: clip; }
+body.mobile #app > div { min-height: 844px !important; }
+.ek-back { position: fixed; left: 16px; bottom: 16px; z-index: 9999; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #0F1419; color: #FFFFFF !important; font: 600 13px 'Open Sans', system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 20px rgba(15,20,25,.25); opacity: .85; }
+.ek-back:hover { opacity: 1; }
+@media (max-width: 430px) { body.mobile #app { margin: 0 auto; border-radius: 0; box-shadow: none; } .ek-back { display: none; } }
+</style>
+</head>
+<body class="mobile">
+<a class="ek-back" href="index.html">← All screens</a>
+<div id="app"></div>
+<template id="dc-root">
+<div style="width: 390px; min-height: 844px; background: #FFFFFF; font-family: 'Open Sans', system-ui, sans-serif; color: #0F1419; position: relative; display: flex; flex-direction: column">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E1EAEF; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between">
+<a href="M-Checkout.html" aria-label="Back to checkout" style="width: 40px; height: 40px; border-radius: 999px; background: #F7F8F8; display: flex; align-items: center; justify-content: center; color: #0F1419"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m15 18-6-6 6-6"/></svg></a>
+<a href="home.html" aria-label="ElectroKade.lk home" style="display: flex; align-items: center; gap: 10px; flex-shrink: 0"><img src="assets/logo-icon.png" alt="" style="height: 30px; width: auto"><img src="assets/logo-word.png" alt="ElectroKade.lk" style="height: 15px; width: auto"></a><span style="display: inline-flex; align-items: center; gap: 4px; color: #00744D; font-size: 12px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure</span></header><template data-sc="if" value="{{showSide}}" hint-placeholder-val="{{ true }}"><div style="border-bottom: 1px solid #E1EAEF; background: #F7F8F8">
+<button type="button" onClick="{{toggleSummary}}" aria-expanded="{{showSummary}}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: none; border: none; font-size: 14.5px; font-weight: 700; color: #0C6DB0">
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Order summary (4)<span style="display: inline-flex; transform: {{summaryChevron}}; transition: transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m6 9 6 6 6-6"/></svg></span></span><b style="color: #0F1419; font-size: 16px">{{total}}</b></button>
+<template data-sc="if" value="{{showSummary}}" hint-placeholder-val="{{ false }}"><div style="padding: 0 16px 16px"><div style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid #E1EAEF"><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/phone-blue.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Samsung Galaxy A55 5G (8GB / 256GB)</div><div style="font-size: 12px; color: #536471">Awesome Ice Blue</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 134,999</span></div><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/earbuds.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">JBL Tune Beam 2 ANC True Wireless Earbuds</div><div style="font-size: 12px; color: #536471">Black</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 24,990</span></div><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/powerbank.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">2</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Anker PowerCore 20,000mAh 22.5W Power Bank</div><div style="font-size: 12px; color: #536471">Black</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 24,980</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 0; border-bottom: 1px solid #E1EAEF">
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #536471">Subtotal (4 items)</span><span style="font-weight: 600; color: #0F1419">Rs. 184,969</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #536471">Coupon EKNEW2500</span><span style="font-weight: 600; color: #00744D">– Rs. 2,500</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #536471">Delivery (Colombo 05)</span><span style="font-weight: 600; color: #00744D">FREE</span></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px"><span style="font-size: 16px; font-weight: 700">Total</span><span style="font-size: 22px; font-weight: 800">Rs. 182,469</span></div>
+<div style="font-size: 12px; color: #536471; text-align: right">Incl. all taxes · LKR</div></div></template></div><div style="padding: 16px 16px 4px"><template data-sc="if" value="{{stepPay}}" hint-placeholder-val="{{ true }}"><nav aria-label="Checkout progress" style="display: flex; align-items: center; gap: 6px"><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #00B87A; border: 2px solid #00B87A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span><span style="font-size: 12px; font-weight: 600; color: #0F1419">Shipping</span></div><div style="flex: 1; height: 2px; background: #00B87A; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #00B87A; border: 2px solid #00B87A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span><span style="font-size: 12px; font-weight: 600; color: #0F1419">Delivery</span></div><div style="flex: 1; height: 2px; background: #00B87A; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" aria-current="step"><span style="width: 28px; height: 28px; border-radius: 999px; background: #1E9DF1; border: 2px solid #1E9DF1; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">3</span><span style="font-size: 12px; font-weight: 700; color: #0F1419">Payment</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">4</span><span style="font-size: 12px; font-weight: 600; color: #536471">Review</span></div></nav></template><template data-sc="if" value="{{stepReview}}" hint-placeholder-val="{{ false }}"><nav aria-label="Checkout progress" style="display: flex; align-items: center; gap: 6px"><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #00B87A; border: 2px solid #00B87A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span><span style="font-size: 12px; font-weight: 600; color: #0F1419">Shipping</span></div><div style="flex: 1; height: 2px; background: #00B87A; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #00B87A; border: 2px solid #00B87A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span><span style="font-size: 12px; font-weight: 600; color: #0F1419">Delivery</span></div><div style="flex: 1; height: 2px; background: #00B87A; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #00B87A; border: 2px solid #00B87A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span><span style="font-size: 12px; font-weight: 600; color: #0F1419">Payment</span></div><div style="flex: 1; height: 2px; background: #00B87A; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" aria-current="step"><span style="width: 28px; height: 28px; border-radius: 999px; background: #1E9DF1; border: 2px solid #1E9DF1; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">4</span><span style="font-size: 12px; font-weight: 700; color: #0F1419">Review</span></div></nav></template></div></template><main style="padding: 14px 16px 32px; flex: 1"><template data-sc="if" value="{{scrPay}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 18px">
+<section aria-label="Payment method" style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 18px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800">Choose how to pay</h2>
+<div role="radiogroup" aria-label="Payment methods" style="display: flex; flex-direction: column; gap: 12px">
+<button type="button" role="radio" aria-checked="{{m_card_sel}}" onClick="{{pick_card}}" style="display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: 20px; border: {{m_card_ring}}; background: {{m_card_bg}}; cursor: pointer; text-align: left; color: #0F1419; width: 100%; min-width: 0">
+<span style="width: 22px; height: 22px; border-radius: 999px; border: {{m_card_dot}}; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="width: 48px; height: 48px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E1EAEF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="assets/ic-card.svg" alt="" style="width: 26px; height: 26px"></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><span style="font-size: 16px; font-weight: 800">Credit / Debit card</span><span style="font-size: 13px; color: #536471; line-height: 1.4">Visa, Mastercard, Amex · 3D Secure</span></span></button>
+<button type="button" role="radio" aria-checked="{{m_cod_sel}}" onClick="{{pick_cod}}" style="display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: 20px; border: {{m_cod_ring}}; background: {{m_cod_bg}}; cursor: pointer; text-align: left; color: #0F1419; width: 100%; min-width: 0">
+<span style="width: 22px; height: 22px; border-radius: 999px; border: {{m_cod_dot}}; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="width: 48px; height: 48px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E1EAEF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="assets/ic-cash.svg" alt="" style="width: 26px; height: 26px"></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><span style="font-size: 16px; font-weight: 800">Cash on Delivery</span><span style="font-size: 13px; color: #536471; line-height: 1.4">Pay the rider · Rs. 250 COD fee</span></span></button>
+<button type="button" role="radio" aria-checked="{{m_koko_sel}}" onClick="{{pick_koko}}" style="display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: 20px; border: {{m_koko_ring}}; background: {{m_koko_bg}}; cursor: pointer; text-align: left; color: #0F1419; width: 100%; min-width: 0">
+<span style="width: 22px; height: 22px; border-radius: 999px; border: {{m_koko_dot}}; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="width: 48px; height: 48px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E1EAEF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="assets/ic-split.svg" alt="" style="width: 26px; height: 26px"></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><span style="font-size: 16px; font-weight: 800">KOKO · Pay in 3</span><span style="font-size: 13px; color: #536471; line-height: 1.4">3 interest-free instalments of Rs. 60,823</span></span></button>
+</div></section>
+<template data-sc="if" value="{{isCard}}" hint-placeholder-val="{{ true }}"><section aria-label="Card details" style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 18px; display: flex; flex-direction: column; gap: 20px"><div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-size: 14px; font-weight: 800">Saved cards</span><a href="#" style="font-size: 13px; font-weight: 700">Manage</a></div>
+<div role="radiogroup" aria-label="Saved cards" style="display: flex; flex-direction: column; gap: 8px">
+<button type="button" role="radio" aria-checked="{{sc_v_sel}}" onClick="{{sc_v}}" style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; border: {{sc_v_ring}}; background: {{sc_v_bg}}; cursor: pointer; text-align: left; color: #0F1419; width: 100%">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: {{sc_v_dot}}; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="width: 52px; height: 34px; border-radius: 8px; background: #1A1F71; color: #FFFFFF; font-size: 10.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0">VISA</span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-family: Menlo, monospace; font-size: 15px; font-weight: 700">•••• 4242</span><span style="font-size: 12.5px; color: #536471">Expires 08/28 · Default</span></span></button>
+<button type="button" role="radio" aria-checked="{{sc_m_sel}}" onClick="{{sc_m}}" style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; border: {{sc_m_ring}}; background: {{sc_m_bg}}; cursor: pointer; text-align: left; color: #0F1419; width: 100%">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: {{sc_m_dot}}; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="width: 52px; height: 34px; border-radius: 8px; background: #0F1419; color: #FFFFFF; font-size: 10.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0">MC</span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-family: Menlo, monospace; font-size: 15px; font-weight: 700">•••• 4444</span><span style="font-size: 12.5px; color: #536471">Expires 11/27</span></span></button>
+<button type="button" role="radio" aria-checked="{{sc_new_sel}}" onClick="{{sc_new}}" style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; border: {{sc_new_ring}}; background: {{sc_new_bg}}; cursor: pointer; color: #0C6DB0; font-weight: 700; font-size: 15px; width: 100%">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: {{sc_new_dot}}; background: #FFFFFF; flex-shrink: 0"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M5 12h14M12 5v14"/></svg>Add new card</button></div>
+<template data-sc="if" value="{{savedPicked}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: flex-end; gap: 12px; padding: 14px; border-radius: 16px; background: #F7F8F8; flex-wrap: wrap">
+<div style="flex: 0 1 180px"><div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="cc-cvv2" style="font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 6px">CVV for •••• {{savedLast4}}</label>
+<div style="display: flex; align-items: center; gap: 8px; background: #F7F9FA; border: 1.5px solid {{cvvErrBorder}}; border-radius: 14px; padding-right: 10px">
+<input id="cc-cvv2" value="{{cvv}}" onChange="{{setCvv}}" placeholder="•••" inputmode="numeric" type="password" aria-invalid="{{cvvErr}}" aria-describedby="cc-cvv2-err" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 16px; color: #0F1419; border-radius: 14px; font-family: Menlo, monospace; letter-spacing: .04em;"></div>
+<template data-sc="if" value="{{cvvErr}}" hint-placeholder-val="{{ false }}"><span id="cc-cvv2-err" role="alert" style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #C4161F; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4161F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>{{cvvErrText}}</span></template></div></div>
+<span style="font-size: 12.5px; color: #536471; padding-bottom: 14px; flex: 1 1 200px">For your security we always ask for the CVV of saved cards.</span></div></template></div><template data-sc="if" value="{{newCard}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 14px"><span style="font-size: 14px; font-weight: 800">New card</span><div style="display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start">
+<div style="flex: 0 1 360px; display: flex; flex-direction: column; gap: 10px; align-items: center; min-width: 0; width: 100%"><div style="perspective: 1200px; width: 100%; max-width: 360px; aspect-ratio: 1.586 / 1; flex-shrink: 0">
+<div style="position: relative; width: 100%; height: 100%; transition: transform .7s cubic-bezier(.3,.7,.2,1); transform-style: preserve-3d; transform: {{flipT}}">
+<div aria-hidden="true" style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 20px; background: {{cardBg}}; color: #FFFFFF; padding: 22px 24px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; box-shadow: 0 18px 40px rgba(15,20,25,.25); transition: background .4s ease">
+<span style="position: absolute; right: -60px; top: -70px; width: 220px; height: 220px; border-radius: 999px; background: rgba(255,255,255,.08)"></span>
+<span style="position: absolute; left: -40px; bottom: -110px; width: 240px; height: 240px; border-radius: 999px; background: rgba(255,255,255,.06)"></span>
+<div style="display: flex; justify-content: space-between; align-items: center; position: relative">
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 44px; height: 32px; border-radius: 7px; background: #E9C46A; border: 1px solid #C9A447; display: block"></span>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="opacity: .8"><path d="M8.5 7.5a6 6 0 0 1 0 9M12 5a10 10 0 0 1 0 14M5 10a2.5 2.5 0 0 1 0 4"/></svg></div>
+<span style="font-size: 20px; font-weight: 800; letter-spacing: .04em; font-style: {{brandStyle}}">{{brandLabel}}</span></div>
+<div style="font-family: Menlo, monospace; font-size: 21px; letter-spacing: .08em; position: relative; white-space: nowrap">{{pvNumber}}</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; position: relative">
+<div style="min-width: 0"><div style="font-size: 9.5px; letter-spacing: .1em; opacity: .7">CARDHOLDER</div><div style="font-size: 14px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px">{{pvName}}</div></div>
+<div><div style="font-size: 9.5px; letter-spacing: .1em; opacity: .7">EXPIRES</div><div style="font-family: Menlo, monospace; font-size: 14px; font-weight: 700">{{pvExp}}</div></div></div></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); border-radius: 20px; background: {{cardBg}}; color: #FFFFFF; overflow: hidden; box-shadow: 0 18px 40px rgba(15,20,25,.25)">
+<div style="height: 44px; background: #0B0D10; margin-top: 26px"></div>
+<div style="display: flex; align-items: center; gap: 10px; padding: 18px 24px 0"><div style="flex: 1; height: 38px; border-radius: 6px; background: repeating-linear-gradient(90deg, #F2F2F2 0 8px, #E2E2E2 8px 16px)"></div>
+<div style="width: 70px; height: 38px; border-radius: 6px; background: #FFFFFF; color: #0F1419; font-family: Menlo, monospace; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 16px; outline: 2px solid #F7B928">{{pvCvv}}</div></div>
+<div style="padding: 10px 24px 0; font-size: 10px; opacity: .7; text-align: right; letter-spacing: .08em">CVV / SECURITY CODE</div>
+<div style="padding: 14px 24px; font-size: 9.5px; opacity: .55; line-height: 1.4">This card is property of the issuing bank. Preview only, ElectroKade.lk never stores CVV.</div></div>
+</div></div><span style="font-size: 12px; color: #536471">Live preview · flips when you enter the CVV</span></div>
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 14px; min-width: 0">
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="cc-num" style="font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 6px">Card number</label>
+<div style="display: flex; align-items: center; gap: 8px; background: #F7F9FA; border: 1.5px solid {{numErrBorder}}; border-radius: 14px; padding-right: 10px">
+<input id="cc-num" value="{{num}}" onChange="{{setNum}}" onFocus="{{unflip}}" onBlur="{{blurNum}}" placeholder="1234 5678 9012 3456" inputmode="numeric" autocomplete="cc-number" aria-invalid="{{numErr}}" aria-describedby="cc-num-err" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 16px; color: #0F1419; border-radius: 14px; font-family: Menlo, monospace; letter-spacing: .04em;"><template data-sc="if" value="{{hasBrand}}" hint-placeholder-val="{{ false }}"><span style="padding: 4px 9px; border-radius: 6px; background: {{brandChipBg}}; color: #FFFFFF; font-size: 11px; font-weight: 800; white-space: nowrap">{{brandLabel}}</span></template>
+<template data-sc="if" value="{{noBrand}}" hint-placeholder-val="{{ true }}"><span style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end"><span style="padding: 4px 8px; border-radius: 6px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 10.5px; font-weight: 800; color: #1A1F71">VISA</span><span style="padding: 4px 8px; border-radius: 6px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 10.5px; font-weight: 800; color: #EB001B">MC</span><span style="padding: 4px 8px; border-radius: 6px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 10.5px; font-weight: 800; color: #2E77BC">AMEX</span></span></template></div>
+<template data-sc="if" value="{{numErr}}" hint-placeholder-val="{{ false }}"><span id="cc-num-err" role="alert" style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #C4161F; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4161F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>{{numErrText}}</span></template></div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="cc-name" style="font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 6px">Cardholder name</label>
+<div style="display: flex; align-items: center; gap: 8px; background: #F7F9FA; border: 1.5px solid {{nameErrBorder}}; border-radius: 14px; padding-right: 10px">
+<input id="cc-name" value="{{name}}" onChange="{{setName}}" onFocus="{{unflip}}" onBlur="{{blurName}}" placeholder="As printed on the card" autocomplete="cc-name" aria-invalid="{{nameErr}}" aria-describedby="cc-name-err" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 16px; color: #0F1419; border-radius: 14px; "></div>
+<template data-sc="if" value="{{nameErr}}" hint-placeholder-val="{{ false }}"><span id="cc-name-err" role="alert" style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #C4161F; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4161F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>{{nameErrText}}</span></template></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="cc-exp" style="font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 6px">Expiry (MM/YY)</label>
+<div style="display: flex; align-items: center; gap: 8px; background: #F7F9FA; border: 1.5px solid {{expErrBorder}}; border-radius: 14px; padding-right: 10px">
+<input id="cc-exp" value="{{exp}}" onChange="{{setExp}}" onFocus="{{unflip}}" onBlur="{{blurExp}}" placeholder="MM/YY" inputmode="numeric" autocomplete="cc-exp" aria-invalid="{{expErr}}" aria-describedby="cc-exp-err" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 16px; color: #0F1419; border-radius: 14px; font-family: Menlo, monospace; letter-spacing: .04em;"></div>
+<template data-sc="if" value="{{expErr}}" hint-placeholder-val="{{ false }}"><span id="cc-exp-err" role="alert" style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #C4161F; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4161F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>{{expErrText}}</span></template></div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="cc-cvv" style="font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 6px">CVV</label>
+<div style="display: flex; align-items: center; gap: 8px; background: #F7F9FA; border: 1.5px solid {{cvvErrBorder}}; border-radius: 14px; padding-right: 10px">
+<input id="cc-cvv" value="{{cvv}}" onChange="{{setCvv}}" onFocus="{{flip}}" onBlur="{{blurCvv}}" placeholder="•••" inputmode="numeric" autocomplete="cc-csc" type="password" aria-invalid="{{cvvErr}}" aria-describedby="cc-cvv-err" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 16px; color: #0F1419; border-radius: 14px; font-family: Menlo, monospace; letter-spacing: .04em;"><span style="position: relative; display: flex"><button type="button" aria-label="What is CVV?" onClick="{{toggleTip}}" style="width: 26px; height: 26px; border-radius: 999px; border: 1px solid #E1EAEF; background: #FFFFFF; font-weight: 800; font-size: 13px; color: #536471; cursor: pointer">?</button>
+<template data-sc="if" value="{{tip}}" hint-placeholder-val="{{ false }}"><span role="tooltip" style="position: absolute; bottom: 36px; right: -8px; width: 230px; background: #0F1419; color: #FFFFFF; font-size: 12.5px; line-height: 1.5; padding: 12px 14px; border-radius: 14px; z-index: 5; box-shadow: 0 10px 30px rgba(15,20,25,.25)">The 3-digit code on the back of your card. Amex: 4 digits on the front, above the number.</span></template></span></div>
+<template data-sc="if" value="{{cvvErr}}" hint-placeholder-val="{{ false }}"><span id="cc-cvv-err" role="alert" style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #C4161F; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4161F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>{{cvvErrText}}</span></template></div></div>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; margin-top: 2px"><input type="checkbox" checked="{{saveCard}}" onChange="{{toggleSave}}" style="width: 20px; height: 20px; accent-color: #1E9DF1">Save this card for faster checkout</label>
+<template data-sc="if" value="{{demoHint}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; border: 1px dashed #B9C4CE; font-size: 12.5px; color: #536471">Test cards:
+<button type="button" onClick="{{fillOk}}" style="padding: 5px 10px; border-radius: 999px; border: 1px solid #E1EAEF; background: #FFFFFF; font-family: Menlo, monospace; font-size: 12px; cursor: pointer">4242 4242 4242 4242</button>
+<button type="button" onClick="{{fillDecline}}" style="padding: 5px 10px; border-radius: 999px; border: 1px solid #E1EAEF; background: #FFFFFF; font-family: Menlo, monospace; font-size: 12px; cursor: pointer">4000 0000 0000 0002 (declines)</button></div></template>
+</div></div></div></template><div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 18px; background: #F7F8F8; border: 1px solid #E1EAEF">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: space-between">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: #00744D"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>256-bit SSL encrypted</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 12px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7CC8FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Secured by <b style="color: #7CC8FF">PayHere</b></span></div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span style="padding: 5px 10px; border-radius: 8px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 11.5px; font-weight: 800; color: #1A1F71">Visa Secure</span><span style="padding: 5px 10px; border-radius: 8px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 11.5px; font-weight: 800; color: #B5121B">Mastercard ID Check</span><span style="padding: 5px 10px; border-radius: 8px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 11.5px; font-weight: 800; color: #2E77BC">AMEX SafeKey</span></div>
+<span style="font-size: 12.5px; color: #536471; line-height: 1.5">We never store your full card details. Card data is tokenised by PayHere (PCI DSS Level 1).</span></div></section></template>
+<template data-sc="if" value="{{isCod}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: 18px; background: #FFF8E6; border: 1px solid #F4DFA6; color: #5C4200">
+<span style="display: flex; gap: 10px; align-items: center; font-size: 15.5px; font-weight: 800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A5500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>Pay when your order arrives</span>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
+<li>Pay the rider in cash, or by card on their mobile POS.</li>
+<li>A <b>Rs. 250 COD handling fee</b> applies. Your new total is <b>Rs. 182,719</b>.</li>
+<li>For orders above Rs. 150,000 we’ll call +94 71 555 0182 to confirm before dispatch.</li>
+<li>Please keep the exact amount ready. Riders may not carry change.</li></ul></div></template>
+<template data-sc="if" value="{{isKoko}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border-radius: 18px; background: #F4EEFC; border: 1px solid #E2D3F7">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap"><span style="font-size: 15.5px; font-weight: 800; color: #2A0E57">Your KOKO plan: 3 × Rs. 60,823</span><span style="padding: 5px 10px; border-radius: 999px; background: #FFFFFF; color: #4A1D8F; font-size: 12px; font-weight: 800">0% interest</span></div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap"><div style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #D9C6F5">
+<span style="width: 28px; height: 28px; border-radius: 999px; background: #7B2CBF; color: #FFFFFF; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span>
+<span style="font-size: 18px; font-weight: 800; color: #2A0E57">Rs. 60,823</span><span style="font-size: 13px; font-weight: 700; color: #4A1D8F">Today</span><span style="font-size: 12px; color: #5E4A80">Charged at checkout</span></div><div style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 16px; background: transparent; border: 1px solid #E7DCF8">
+<span style="width: 28px; height: 28px; border-radius: 999px; background: #E7DCF8; color: #4A1D8F; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center">2</span>
+<span style="font-size: 18px; font-weight: 800; color: #2A0E57">Rs. 60,823</span><span style="font-size: 13px; font-weight: 700; color: #4A1D8F">Thu, 17 Dec</span><span style="font-size: 12px; color: #5E4A80">In 30 days</span></div><div style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 16px; background: transparent; border: 1px solid #E7DCF8">
+<span style="width: 28px; height: 28px; border-radius: 999px; background: #E7DCF8; color: #4A1D8F; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center">3</span>
+<span style="font-size: 18px; font-weight: 800; color: #2A0E57">Rs. 60,823</span><span style="font-size: 13px; font-weight: 700; color: #4A1D8F">Sat, 16 Jan</span><span style="font-size: 12px; color: #5E4A80">In 60 days</span></div></div>
+<span style="font-size: 13px; color: #4A1D8F; line-height: 1.5">You’ll be taken to KOKO to sign in or sign up with your NIC and a debit/credit card. Total payable Rs. 182,469; KOKO may show a small convenience fee before you confirm.</span></div></template>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<a href="M-Checkout.html" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m15 18-6-6 6-6"/></svg>Back to delivery</a>
+<button type="button" class="ek-btn" onClick="{{toReview}}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 17px 28px; border-radius: 999px; border: none; background: #1E9DF1; color: #FFFFFF; font-weight: 700; font-size: 16.5px; cursor: pointer; width: 100%">{{payStepCta}}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m9 18 6-6-6-6"/></svg></button></div>
+</div></template><template data-sc="if" value="{{scrReview}}" hint-placeholder-val="{{ false }}"><section aria-label="Review your order" style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0 0 6px; font-size: 18px; font-weight: 800">Review &amp; place your order</h2>
+<div style="display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid #E1EAEF; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+<div style="flex: 1; min-width: 0"><div style="font-size: 12.5px; font-weight: 800; color: #536471; letter-spacing: .06em">SHIP TO</div><div style="font-size: 14.5px; margin-top: 3px; line-height: 1.5">Nimal Perera · +94 71 555 0182<br>No. 42/3, Havelock Road, Colombo 05, 00500</div></div>
+<button type="button" onClick="{{toPay}}" style="background: none; border: none; color: #0C6DB0; font-weight: 700; font-size: 13.5px; cursor: pointer">Edit</button></div>
+<div style="display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid #E1EAEF; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+<div style="flex: 1; min-width: 0"><div style="font-size: 12.5px; font-weight: 800; color: #536471; letter-spacing: .06em">DELIVERY</div><div style="font-size: 14.5px; margin-top: 3px; line-height: 1.5">Standard delivery · <b style="color: #00744D">FREE</b> · Arrives Wed 18 – Thu 19 Nov</div></div>
+<button type="button" onClick="{{toPay}}" style="background: none; border: none; color: #0C6DB0; font-weight: 700; font-size: 13.5px; cursor: pointer">Edit</button></div>
+<div style="display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid #E1EAEF; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
+<div style="flex: 1; min-width: 0"><div style="font-size: 12.5px; font-weight: 800; color: #536471; letter-spacing: .06em">PAYMENT</div><div style="font-size: 14.5px; margin-top: 3px; line-height: 1.5">{{reviewPay}}</div></div>
+<button type="button" onClick="{{toPay}}" style="background: none; border: none; color: #0C6DB0; font-weight: 700; font-size: 13.5px; cursor: pointer">Edit</button></div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 0; border-bottom: 1px solid #E1EAEF"><div style="display: flex; gap: 12px; align-items: center"><div style="width: 48px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 6px; overflow: hidden"><img src="assets/phone-blue.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="flex: 1; font-size: 13.5px; font-weight: 600">1 × Samsung Galaxy A55 5G (8GB / 256GB)</span><b style="font-size: 13.5px">Rs. 134,999</b></div><div style="display: flex; gap: 12px; align-items: center"><div style="width: 48px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 6px; overflow: hidden"><img src="assets/earbuds.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="flex: 1; font-size: 13.5px; font-weight: 600">1 × JBL Tune Beam 2 ANC True Wireless Earbuds</span><b style="font-size: 13.5px">Rs. 24,990</b></div><div style="display: flex; gap: 12px; align-items: center"><div style="width: 48px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 6px; overflow: hidden"><img src="assets/powerbank.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="flex: 1; font-size: 13.5px; font-weight: 600">2 × Anker PowerCore 20,000mAh 22.5W Power Bank</span><b style="font-size: 13.5px">Rs. 24,980</b></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 4px"><span style="font-size: 16px; font-weight: 800">{{totalLabel}}</span><span style="font-size: 26px; font-weight: 800">{{total}}</span></div>
+<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.5; padding: 8px 0 12px; cursor: pointer"><input type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 20px; height: 20px; accent-color: #1E9DF1; margin-top: 1px">I agree to the <a href="#">Terms of Sale</a>, <a href="#">Warranty</a> and <a href="#">Returns policy</a>.</label>
+<button type="button" class="ek-btn" onClick="{{placeOrder}}" disabled="{{cantPay}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 19px; border-radius: 999px; border: none; background: {{payBg}}; color: #FFFFFF; font-weight: 800; font-size: 18px; cursor: {{payCursor}}; width: 100%"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>{{payCta}}</button>
+<span style="text-align: center; font-size: 12.5px; color: #536471; margin-top: 4px">{{payNote}}</span>
+<div style="margin-top: 12px"><div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 18px; background: #F7F8F8; border: 1px solid #E1EAEF">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: space-between">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: #00744D"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>256-bit SSL encrypted</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 12px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7CC8FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Secured by <b style="color: #7CC8FF">PayHere</b></span></div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span style="padding: 5px 10px; border-radius: 8px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 11.5px; font-weight: 800; color: #1A1F71">Visa Secure</span><span style="padding: 5px 10px; border-radius: 8px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 11.5px; font-weight: 800; color: #B5121B">Mastercard ID Check</span><span style="padding: 5px 10px; border-radius: 8px; border: 1px solid #E1EAEF; background: #FFFFFF; font-size: 11.5px; font-weight: 800; color: #2E77BC">AMEX SafeKey</span></div>
+<span style="font-size: 12.5px; color: #536471; line-height: 1.5">We never store your full card details. Card data is tokenised by PayHere (PCI DSS Level 1).</span></div></div>
+<button type="button" onClick="{{toPay}}" style="align-self: flex-start; margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: #0C6DB0; font-weight: 700; font-size: 15px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m15 18-6-6 6-6"/></svg>Back to payment</button>
+</section></template><template data-sc="if" value="{{scrOtp}}" hint-placeholder-val="{{ false }}"><section aria-label="3D Secure verification" style="max-width: 520px; margin: 0 auto; width: 100%; background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(15,20,25,.08)">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; background: #F7F8F8; border-bottom: 1px solid #E1EAEF">
+<span style="font-size: 13px; font-weight: 800; color: #1A1F71; display: inline-flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1F71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>{{secureName}}</span><span style="font-size: 13px; font-weight: 700; color: #536471">Your card issuer</span></div>
+<div style="padding: 22px; display: flex; flex-direction: column; gap: 18px">
+<div><h2 style="margin: 0; font-size: 22px; font-weight: 800">Verify it’s you</h2><p style="margin: 6px 0 0; font-size: 14.5px; color: #536471; line-height: 1.55">Enter the 6-digit code sent to <b style="color: #0F1419">+94 71 ••• ••82</b> to approve this payment.</p></div>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 14px; padding: 14px 16px; border-radius: 14px; background: #F7F8F8">
+<dt style="color: #536471">Merchant</dt><dd style="margin: 0; font-weight: 700; text-align: right">ElectroKade.lk</dd>
+<dt style="color: #536471">Amount</dt><dd style="margin: 0; font-weight: 800; text-align: right">Rs. 182,469</dd>
+<dt style="color: #536471">Card</dt><dd style="margin: 0; font-weight: 700; text-align: right; font-family: Menlo, monospace">{{cardMasked}}</dd></dl>
+<div style="position: relative">
+<label for="otp" style="font-size: 13.5px; font-weight: 700; display: block; margin-bottom: 8px">One-time password</label>
+<div style="position: relative; display: flex; gap: 8px; justify-content: space-between"><template data-sc="for" list="{{otpBoxes}}" as="b" hint-placeholder-count="6"><span style="flex: 1; max-width: 52px; height: 56px; border-radius: 14px; border: {{b.border}}; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; font-family: Menlo, monospace">{{b.d}}</span></template>
+<input id="otp" value="{{otp}}" onChange="{{setOtp}}" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-describedby="otp-help" style="position: absolute; inset: 0; opacity: 0; font-size: 16px; cursor: text"></div>
+<span id="otp-help" style="display: block; margin-top: 8px; font-size: 12.5px; color: #536471">Demo: <b>123456</b> approves, any other code shows a failure.</span></div>
+<button type="button" class="ek-btn" onClick="{{verifyOtp}}" disabled="{{otpIncomplete}}" style="padding: 17px; border-radius: 999px; border: none; background: {{otpBtnBg}}; color: #FFFFFF; font-weight: 800; font-size: 16.5px; cursor: pointer">Verify &amp; pay Rs. 182,469</button>
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; flex-wrap: wrap; gap: 8px">
+<template data-sc="if" value="{{canResend}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{resend}}" style="background: none; border: none; padding: 0; color: #0C6DB0; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>Resend code</button></template>
+<template data-sc="if" value="{{waitResend}}" hint-placeholder-val="{{ true }}"><span style="color: #536471; display: inline-flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Resend code in <b style="color: #0F1419; font-variant-numeric: tabular-nums">{{resendIn}}</b></span></template>
+<button type="button" onClick="{{cancelOtp}}" style="background: none; border: none; padding: 0; color: #536471; font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: underline">Cancel payment</button></div>
+</div></section></template><template data-sc="if" value="{{scrProc}}" hint-placeholder-val="{{ false }}"><section aria-live="polite" style="max-width: 520px; margin: 0 auto; width: 100%; padding: 48px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 24px">
+<div style="position: relative; width: 96px; height: 96px"><span style="position: absolute; inset: 0; border-radius: 999px; border: 6px solid #E3ECF6"></span><span style="position: absolute; inset: 0; border-radius: 999px; border: 6px solid transparent; border-top-color: #1E9DF1; border-right-color: #1E9DF1; animation: ekspin 1s linear infinite"></span>
+<span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></div>
+<h2 style="margin: 0; font-size: 23px; font-weight: 800">{{procTitle}}</h2>
+<p style="margin: 0; font-size: 15px; color: #536471; line-height: 1.6; max-width: 360px">Please don’t close this page or press back. This usually takes a few seconds.</p>
+<div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 340px; text-align: left; margin-top: 6px">
+<span style="display: flex; gap: 10px; align-items: center; font-size: 14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Secure connection established</span>
+<span style="display: flex; gap: 10px; align-items: center; font-size: 14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>{{procStep2}}</span>
+<span style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: #536471"><span style="width: 18px; height: 18px; border-radius: 999px; border: 2px solid #E1EAEF; border-top-color: #1E9DF1; animation: ekspin .9s linear infinite"></span>Confirming order with ElectroKade</span></div>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 12px; font-weight: 700; margin-top: 8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7CC8FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Secured by <b style="color: #7CC8FF">PayHere</b></span>
+</section></template><template data-sc="if" value="{{scrOk}}" hint-placeholder-val="{{ false }}"><section aria-live="polite" style="max-width: 560px; margin: 0 auto; width: 100%; padding: 36px 22px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 24px">
+<svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true" style="animation: ekpop .5s ease">
+<circle cx="52" cy="52" r="48" fill="#E6F8F1"/><circle cx="52" cy="52" r="40" fill="#00B87A" style="stroke-dasharray: 260; stroke-dashoffset: 0"/>
+<path d="M34 53 L47 66 L71 40" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray: 60; stroke-dashoffset: 60; animation: ekdraw .5s .35s ease forwards"/></svg>
+<h2 style="margin: 4px 0 0; font-size: 26px; font-weight: 800">{{successTitle}}</h2>
+<p style="margin: 0; font-size: 15px; color: #536471; line-height: 1.6">Thank you, Nimal. A confirmation has been sent by SMS and to nimal.p@example.com.</p>
+<dl style="margin: 8px 0 0; width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 12px 16px; padding: 18px 20px; border-radius: 18px; background: #F7F8F8; border: 1px solid #E1EAEF; font-size: 14.5px; text-align: left">
+<dt style="color: #536471">Order number</dt><dd style="margin: 0; text-align: right; font-weight: 800; font-family: Menlo, monospace">EK-2611-48213</dd>
+<dt style="color: #536471">{{amountLabel}}</dt><dd style="margin: 0; text-align: right; font-weight: 800">{{total}}</dd>
+<dt style="color: #536471">Payment</dt><dd style="margin: 0; text-align: right; font-weight: 700">{{paidWith}}</dd>
+<dt style="color: #536471">Estimated delivery</dt><dd style="margin: 0; text-align: right; font-weight: 700; color: #00744D">Wed 18 – Thu 19 Nov</dd></dl>
+<div style="display: flex; gap: 10px; width: 100%; margin-top: 8px; flex-wrap: wrap">
+<a href="M-Confirmation.html" class="ek-btn" style="flex: 1 1 180px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 999px; background: #1E9DF1; color: #FFFFFF; font-weight: 700; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>Track order</a>
+<a href="M-Home.html" class="ek-btn" style="flex: 1 1 180px; display: flex; align-items: center; justify-content: center; padding: 16px; border-radius: 999px; border: 1.5px solid #E1EAEF; color: #0F1419; font-weight: 700; font-size: 16px">Continue shopping</a></div>
+<button type="button" onClick="{{restart}}" style="margin-top: 4px; background: none; border: none; color: #536471; font-size: 12.5px; cursor: pointer; text-decoration: underline">Restart demo</button>
+</section></template><template data-sc="if" value="{{scrFail}}" hint-placeholder-val="{{ false }}"><section role="alert" style="max-width: 560px; margin: 0 auto; width: 100%; padding: 36px 22px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 24px">
+<span style="width: 104px; height: 104px; border-radius: 999px; background: #FFE8EA; display: flex; align-items: center; justify-content: center; animation: ekpop .45s ease"><span style="width: 80px; height: 80px; border-radius: 999px; background: #F4212E; display: flex; align-items: center; justify-content: center"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M18 6 6 18M6 6l12 12"/></svg></span></span>
+<h2 style="margin: 4px 0 0; font-size: 26px; font-weight: 800">Payment failed</h2>
+<div style="width: 100%; padding: 14px 16px; border-radius: 16px; background: #FFF5F5; border: 1px solid #FFD9DC; text-align: left; display: flex; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4161F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><div><div style="font-weight: 800; font-size: 14.5px; color: #8A0F16">{{failTitle}}</div><div style="font-size: 13.5px; color: #6B2A2E; margin-top: 2px; line-height: 1.5">{{failText}}</div></div></div>
+<p style="margin: 0; font-size: 14px; color: #536471; line-height: 1.6">No money was taken. If you see a pending charge, your bank will release it within 5–7 working days. Your cart is saved.</p>
+<div style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 6px">
+<button type="button" class="ek-btn" onClick="{{retry}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 999px; border: none; background: #1E9DF1; color: #FFFFFF; font-weight: 700; font-size: 16px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>Try again</button>
+<button type="button" class="ek-btn" onClick="{{otherMethod}}" style="padding: 16px; border-radius: 999px; border: 1.5px solid #E1EAEF; background: #FFFFFF; color: #0F1419; font-weight: 700; font-size: 16px; cursor: pointer">Choose another payment method</button></div>
+<a href="#" style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #0B7A3E; margin-top: 4px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B7A3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 10.5c.5 1.6 2 3.1 3.6 3.6l1.2-1.1 1.7.7-.3 1.5c-3.3.2-6.9-3.4-6.7-6.7l1.5-.3.7 1.7z"/></svg>Need help? WhatsApp +94 77 123 4567</a>
+</section></template></main>
+</div>
+</template>
+
+<script src="js/react.production.min.js"></script>
+<script src="js/react-dom.production.min.js"></script>
+<script src="js/dc-export.js"></script>
+<script>
+(window.__defs || []).forEach(function (d) { DC.define(d[0], d[1]); });
+DC.mount(function (DCLogic) {
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = this.initial(props);
+  }
+  initial(p) {
+    const f = p.filled || 'valid';
+    const base = { scr: p.screen || 'success', method: p.method || 'card', saved: f === 'saved' ? 'v' : 'new', num: '', name: '', exp: '', cvv: '', flipped: false,
+      touched: {}, submitted: false, save: true, tip: false, agree: true, otp: '', resend: 30, fail: 'otp', showSummary: false };
+    if (f === 'valid' || ['review', 'otp', 'processing', 'success'].includes(base.scr)) Object.assign(base, { num: '4242 4242 4242 4242', name: 'NIMAL PERERA', exp: '08/28', cvv: '123' });
+    if (f === 'errors') Object.assign(base, { num: '4242 4242 4242 4241', name: '', exp: '09/24', cvv: '12', submitted: true });
+    if (base.scr === 'otp' && (p.freeze ?? true)) Object.assign(base, { otp: '1234', resend: 18 });
+    if (base.scr === 'failed') base.fail = 'declined';
+    return base;
+  }
+  componentDidMount() { this.arm(); }
+  componentDidUpdate(pp, ps) {
+    const p = this.props;
+    if (pp.screen !== p.screen || pp.method !== p.method || pp.filled !== p.filled) { this.setState(this.initial(p)); return; }
+    if (ps.scr !== this.state.scr) this.arm();
+  }
+  componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.to); }
+  arm() {
+    clearInterval(this.iv); clearTimeout(this.to);
+    if ((this.props.freeze ?? true)) return;
+    if (this.state.scr === 'otp') this.iv = setInterval(() => this.setState((s) => ({ resend: Math.max(0, s.resend - 1) })), 1000);
+    if (this.state.scr === 'processing') this.to = setTimeout(() => {
+      const s = this.state;
+      const declined = s.method === 'card' && s.saved === 'new' && s.num.replace(/\s/g, '') === '4000000000000002';
+      const badOtp = s.method === 'card' && s.otp !== '123456';
+      this.setState({ scr: declined || badOtp ? 'failed' : 'success', fail: declined ? 'declined' : 'otp' });
+    }, 2600);
+  }
+  renderVals() {
+    const S = this.state, set = (o) => this.setState(o);
+    const fmt = (n) => 'Rs. ' + n.toLocaleString('en-US');
+    const BASE = 182469, COD = 250;
+    const total = S.method === 'cod' ? BASE + COD : BASE;
+    const digits = S.num.replace(/\D/g, '');
+    const brand = /^3[47]/.test(digits) ? 'amex' : /^4/.test(digits) ? 'visa' : /^(5[1-5]|2[2-7])/.test(digits) ? 'mc' : '';
+    const maxLen = brand === 'amex' ? 15 : 16;
+    const luhn = (d) => { let s = 0, alt = false; for (let i = d.length - 1; i >= 0; i--) { let n = +d[i]; if (alt) { n *= 2; if (n > 9) n -= 9; } s += n; alt = !alt; } return s % 10 === 0; };
+    const groupNum = (d, b) => (b === 'amex' ? [d.slice(0, 4), d.slice(4, 10), d.slice(10, 15)] : d.match(/.{1,4}/g) || []).filter(Boolean).join(' ');
+    // validation
+    const show = (k) => S.submitted || S.touched[k];
+    let numErr = '';
+    if (!digits) numErr = 'Enter your card number.';
+    else if (!brand) numErr = 'We accept Visa, Mastercard and Amex only.';
+    else if (digits.length < maxLen) numErr = 'Card number is incomplete.';
+    else if (!luhn(digits)) numErr = 'Invalid card number. Please check and try again.';
+    const nameErr = S.name.trim().length < 3 ? 'Enter the name exactly as printed on the card.' : '';
+    let expErr = '';
+    const em = S.exp.match(/^(\d{2})\/(\d{2})$/);
+    if (!em) expErr = 'Enter expiry as MM/YY.';
+    else { const mm = +em[1], yy = +em[2]; if (mm < 1 || mm > 12) expErr = 'Month must be between 01 and 12.'; else if (yy < 26 || (yy === 26 && mm < 11)) expErr = 'This card has expired. Use another card.'; }
+    const cvvLen = S.saved === 'new' ? (brand === 'amex' ? 4 : 3) : 3;
+    const cvvErr = S.cvv.length !== cvvLen ? (brand === 'amex' && S.saved === 'new' ? 'Amex CVV is 4 digits (front of card).' : 'CVV must be 3 digits.') : '';
+    const newCard = S.saved === 'new';
+    const cardOk = newCard ? !(numErr || nameErr || expErr || cvvErr) : !cvvErr;
+    const err = (k, msg) => !!(msg && show(k));
+    const B = (k, msg) => (err(k, msg) ? '#C4161F' : '#E1EAEF');
+    const cardBg = { visa: '#1A1F71', mc: '#1F2329', amex: '#1F5E9C', '': '#0F1419' }[brand];
+    const brandLabel = { visa: 'VISA', mc: 'Mastercard', amex: 'AMEX', '': '' }[brand];
+    const pvRaw = groupNum(digits, brand);
+    const tmpl = brand === 'amex' ? '•••• •••••• •••••' : '•••• •••• •••• ••••';
+    let pv = ''; let j = 0; for (const ch of tmpl) { if (ch === ' ') { pv += ' '; continue; } pv += j < digits.length ? digits[j] : '•'; j++; }
+    const last4 = newCard ? digits.slice(-4) || '0000' : S.saved === 'v' ? '4242' : '4444';
+    const cardName = newCard ? (brandLabel || 'Card') : S.saved === 'v' ? 'Visa' : 'Mastercard';
+    const ring = (on) => (on ? '2px solid #1E9DF1' : '1.5px solid #E1EAEF');
+    const dot = (on) => (on ? '6px solid #1E9DF1' : '1.5px solid #B9C4CE');
+    const bg = (on) => (on ? '#E3ECF6' : '#FFFFFF');
+    const M = (k) => S.method === k;
+    const goReview = () => { if (S.method === 'card' && !cardOk) { set({ submitted: true }); return; } set({ scr: 'review', flipped: false }); };
+    const otpDigits = S.otp.split('');
+    const sc = (k) => ({ ['sc_' + k]: () => set({ saved: k, cvv: '', submitted: false, touched: {} }), ['sc_' + k + '_sel']: String(S.saved === k), ['sc_' + k + '_ring']: ring(S.saved === k), ['sc_' + k + '_dot']: dot(S.saved === k), ['sc_' + k + '_bg']: bg(S.saved === k) });
+    const mm = (k) => ({ ['pick_' + k]: () => set({ method: k, submitted: false }), ['m_' + k + '_sel']: String(M(k)), ['m_' + k + '_ring']: ring(M(k)), ['m_' + k + '_dot']: dot(M(k)), ['m_' + k + '_bg']: bg(M(k)) });
+    return {
+      ...mm('card'), ...mm('cod'), ...mm('koko'), ...sc('v'), ...sc('m'), ...sc('new'),
+      scrPay: S.scr === 'pay', scrReview: S.scr === 'review', scrOtp: S.scr === 'otp', scrProc: S.scr === 'processing', scrOk: S.scr === 'success', scrFail: S.scr === 'failed',
+      showSteps: S.scr === 'pay' || S.scr === 'review', stepPay: S.scr === 'pay', stepReview: S.scr === 'review', showSide: S.scr === 'pay' || S.scr === 'review',
+      isCard: M('card'), isCod: M('cod'), isKoko: M('koko'), newCard, savedPicked: !newCard, savedLast4: last4,
+      num: S.num, name: S.name, exp: S.exp, cvv: S.cvv,
+      setNum: (e) => { const d = e.target.value.replace(/\D/g, ''); const b = /^3[47]/.test(d) ? 'amex' : ''; set({ num: groupNum(d.slice(0, b === 'amex' ? 15 : 16), b) }); },
+      setName: (e) => set({ name: e.target.value.toUpperCase().replace(/[^A-Z .'-]/g, '').slice(0, 26) }),
+      setExp: (e) => { let d = e.target.value.replace(/\D/g, '').slice(0, 4); if (d.length === 1 && +d > 1) d = '0' + d; set({ exp: d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d }); },
+      setCvv: (e) => set({ cvv: e.target.value.replace(/\D/g, '').slice(0, 4) }),
+      flip: () => set({ flipped: true }), unflip: () => set({ flipped: false }),
+      blurNum: () => set({ touched: { ...S.touched, num: true } }), blurName: () => set({ touched: { ...S.touched, name: true } }),
+      blurExp: () => set({ touched: { ...S.touched, exp: true } }), blurCvv: () => set({ flipped: false, touched: { ...S.touched, cvv: true } }),
+      numErr: err('num', numErr), numErrText: numErr, numErrBorder: B('num', numErr),
+      nameErr: err('name', nameErr), nameErrText: nameErr, nameErrBorder: B('name', nameErr),
+      expErr: err('exp', expErr), expErrText: expErr, expErrBorder: B('exp', expErr),
+      cvvErr: err('cvv', cvvErr), cvvErrText: cvvErr, cvvErrBorder: B('cvv', cvvErr),
+      hasBrand: !!brand, noBrand: !brand, brandLabel, brandChipBg: cardBg, brandStyle: brand === 'visa' ? 'italic' : 'normal',
+      cardBg, flipT: S.flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+      pvNumber: pv, pvName: S.name || 'YOUR NAME', pvExp: S.exp || 'MM/YY', pvCvv: S.cvv ? S.cvv.replace(/./g, '•').slice(0, -1) + S.cvv.slice(-1) : '•••',
+      saveCard: S.save, toggleSave: () => set({ save: !S.save }), tip: S.tip, toggleTip: () => set({ tip: !S.tip }),
+      demoHint: newCard,
+      fillOk: () => set({ num: '4242 4242 4242 4242', name: 'NIMAL PERERA', exp: '08/28', cvv: '123', submitted: false, touched: {} }),
+      fillDecline: () => set({ num: '4000 0000 0000 0002', name: 'NIMAL PERERA', exp: '08/28', cvv: '123', submitted: false, touched: {} }),
+      payStepCta: 'Continue to review · ' + fmt(total), toReview: goReview, toPay: () => set({ scr: 'pay' }),
+      total: fmt(total), totalLabel: M('cod') ? 'Pay on delivery' : M('koko') ? 'Total (3 × ' + fmt(Math.ceil(total / 3)) + ')' : 'Total to pay',
+      reviewPay: M('card') ? cardName + ' •••• ' + last4 + (newCard && S.save ? ' · will be saved' : '') : M('cod') ? 'Cash on Delivery · incl. Rs. 250 COD fee' : 'KOKO · 3 × ' + fmt(Math.ceil(total / 3)) + ', 0% interest',
+      payCta: M('card') ? 'Pay ' + fmt(total) : M('cod') ? 'Place order · ' + fmt(total) : 'Continue to KOKO · ' + fmt(Math.ceil(total / 3)) + ' today',
+      payNote: M('card') ? 'You may be asked to verify with your bank (3D Secure).' : M('cod') ? 'Pay the rider when your order arrives.' : 'You’ll be redirected to KOKO to confirm your plan.',
+      agree: S.agree, toggleAgree: () => set({ agree: !S.agree }), cantPay: !S.agree, payBg: S.agree ? '#1E9DF1' : '#B9C4CE', payCursor: S.agree ? 'pointer' : 'not-allowed',
+      placeOrder: () => { if (!S.agree) return; set(M('card') ? { scr: 'otp', otp: '', resend: 30 } : { scr: 'processing' }); },
+      secureName: brand === 'mc' || S.saved === 'm' ? 'Mastercard ID Check' : brand === 'amex' ? 'American Express SafeKey' : 'Visa Secure',
+      cardMasked: cardName + ' •••• ' + last4,
+      otp: S.otp, setOtp: (e) => set({ otp: e.target.value.replace(/\D/g, '').slice(0, 6) }),
+      otpBoxes: [0, 1, 2, 3, 4, 5].map((i) => ({ d: otpDigits[i] || '', border: i === otpDigits.length ? '2px solid #1E9DF1' : otpDigits[i] ? '1.5px solid #0F1419' : '1.5px solid #E1EAEF' })),
+      otpIncomplete: S.otp.length < 6, otpBtnBg: S.otp.length < 6 ? '#B9C4CE' : '#1E9DF1',
+      verifyOtp: () => { if (S.otp.length === 6) set({ scr: 'processing' }); },
+      canResend: S.resend === 0, waitResend: S.resend > 0, resendIn: '0:' + String(S.resend).padStart(2, '0'),
+      resend: () => set({ resend: 30, otp: '' }), cancelOtp: () => set({ scr: 'review' }),
+      procTitle: M('koko') ? 'Redirecting you to KOKO…' : M('cod') ? 'Placing your order…' : 'Processing your payment…',
+      procStep2: M('card') ? 'Verified by your bank (3D Secure)' : M('koko') ? 'Instalment plan prepared' : 'Order details validated',
+      successTitle: M('cod') ? 'Order placed!' : 'Payment successful!',
+      amountLabel: M('cod') ? 'To pay on delivery' : M('koko') ? 'Paid today (1 of 3)' : 'Amount paid',
+      paidWith: M('card') ? cardName + ' •••• ' + last4 : M('cod') ? 'Cash on Delivery' : 'KOKO · 3 instalments',
+      failTitle: S.fail === 'declined' ? 'Declined by your bank' : 'Incorrect or expired OTP',
+      failText: S.fail === 'declined' ? 'Your bank declined this transaction (code 05: do not honour). Try another card or contact your bank.' : 'The verification code didn’t match. Request a new code and try again.',
+      retry: () => set(S.fail === 'declined' ? { scr: 'pay', submitted: false } : { scr: 'otp', otp: '', resend: 30 }),
+      otherMethod: () => set({ scr: 'pay', method: 'cod' }),
+      restart: () => this.setState(this.initial({ screen: 'pay', method: 'card', filled: 'empty' })),
+      showSummary: S.showSummary, toggleSummary: () => set({ showSummary: !S.showSummary }), summaryChevron: S.showSummary ? 'rotate(180deg)' : 'rotate(0deg)',
+      codFee: M('cod'),
+    };
+  }
+}
+
+return Component; });
+</script>
+</body>
+</html>

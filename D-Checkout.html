@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — ElectroKade.lk</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Open Sans', system-ui, sans-serif;color:#0F1419;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0C6DB0;text-decoration:none}a:hover{color:#0F1419}
+button,input,select,textarea{font-family:inherit}
+input::placeholder,textarea::placeholder{color:#7A8691}
+.ek-card{transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease}
+.ek-card:hover{box-shadow:0 10px 30px rgba(15,20,25,.08);transform:translateY(-2px);border-color:#CFDDE6}
+.ek-btn{transition:filter .15s ease, transform .15s ease}
+.ek-btn:hover{filter:brightness(.94)}.ek-btn:active{transform:scale(.98)}
+.ek-link:hover{color:#0C6DB0}
+.ek-field:focus{outline:none;border-color:#1E9DF1;box-shadow:0 0 0 3px rgba(30,157,241,.18)}
+@keyframes ekspin{to{transform:rotate(360deg)}}
+@keyframes ekpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+@keyframes ekdraw{to{stroke-dashoffset:0}}
+@keyframes ekshimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+@keyframes ekflip{from{opacity:.6}to{opacity:1}}
+</style>
+
+<style>
+body.desktop #app > div { min-height: 0 !important; }
+body.mobile { background: #E9EDF1; }
+body.mobile #app { width: 390px; margin: 24px auto 48px; background: #FFFFFF; border-radius: 36px; box-shadow: 0 30px 80px rgba(15,20,25,.18); transform: translateZ(0); overflow: clip; }
+body.mobile #app > div { min-height: 844px !important; }
+.ek-back { position: fixed; left: 16px; bottom: 16px; z-index: 9999; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #0F1419; color: #FFFFFF !important; font: 600 13px 'Open Sans', system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 20px rgba(15,20,25,.25); opacity: .85; }
+.ek-back:hover { opacity: 1; }
+@media (max-width: 430px) { body.mobile #app { margin: 0 auto; border-radius: 0; box-shadow: none; } .ek-back { display: none; } }
+</style>
+</head>
+<body class="desktop">
+<a class="ek-back" href="index.html">← All screens</a>
+<div id="app"></div>
+<template id="dc-root">
+<div style="width: 100%; min-height: 1700px; background: #FFFFFF; font-family: 'Open Sans', system-ui, sans-serif; color: #0F1419; position: relative">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E1EAEF">
+<div style="width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 32px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; flex-wrap: wrap">
+<a href="home.html" aria-label="ElectroKade.lk home" style="display: flex; align-items: center; gap: 10px; flex-shrink: 0"><img src="assets/logo-icon.png" alt="" style="height: 40px; width: auto"><img src="assets/logo-word.png" alt="ElectroKade.lk" style="height: 20px; width: auto"></a>
+<div style="display: flex; align-items: center; gap: 22px; font-size: 13.5px; color: #536471; flex-wrap: wrap">
+<span style="display: inline-flex; align-items: center; gap: 6px; color: #00744D; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure checkout</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Need help? +94 77 123 4567</span></div>
+</div></header><main style="background: #FFFFFF; min-height: 1500px"><div style="width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 32px; box-sizing: border-box; padding-top: 28px; padding-bottom: 72px">
+<div style="max-width: 720px"><template data-sc="if" value="{{s0}}" hint-placeholder-val="{{ true }}"><nav aria-label="Checkout progress" style="display: flex; align-items: center; gap: 12px"><div style="display: flex; align-items: center; gap: 8px; " aria-current="step"><span style="width: 28px; height: 28px; border-radius: 999px; background: #1E9DF1; border: 2px solid #1E9DF1; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">1</span><span style="font-size: 14px; font-weight: 700; color: #0F1419">Shipping</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; "></div><div style="display: flex; align-items: center; gap: 8px; " ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">2</span><span style="font-size: 14px; font-weight: 600; color: #536471">Delivery</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; "></div><div style="display: flex; align-items: center; gap: 8px; " ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">3</span><span style="font-size: 14px; font-weight: 600; color: #536471">Payment</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; "></div><div style="display: flex; align-items: center; gap: 8px; " ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">4</span><span style="font-size: 14px; font-weight: 600; color: #536471">Review</span></div></nav></template><template data-sc="if" value="{{s1}}" hint-placeholder-val="{{ false }}"><nav aria-label="Checkout progress" style="display: flex; align-items: center; gap: 12px"><div style="display: flex; align-items: center; gap: 8px; " ><span style="width: 28px; height: 28px; border-radius: 999px; background: #00B87A; border: 2px solid #00B87A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span><span style="font-size: 14px; font-weight: 600; color: #0F1419">Shipping</span></div><div style="flex: 1; height: 2px; background: #00B87A; min-width: 16px; "></div><div style="display: flex; align-items: center; gap: 8px; " aria-current="step"><span style="width: 28px; height: 28px; border-radius: 999px; background: #1E9DF1; border: 2px solid #1E9DF1; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">2</span><span style="font-size: 14px; font-weight: 700; color: #0F1419">Delivery</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; "></div><div style="display: flex; align-items: center; gap: 8px; " ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">3</span><span style="font-size: 14px; font-weight: 600; color: #536471">Payment</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; "></div><div style="display: flex; align-items: center; gap: 8px; " ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">4</span><span style="font-size: 14px; font-weight: 600; color: #536471">Review</span></div></nav></template></div>
+<div style="display: flex; gap: 32px; margin-top: 28px; flex-wrap: wrap; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0"><template data-sc="if" value="{{s0}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 20px">
+<section aria-label="Account" style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 19px; font-weight: 800">How would you like to check out?</h2>
+<div role="radiogroup" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+<template data-sc="for" list="{{modes}}" as="m" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{m.sel}}" onClick="{{m.pick}}" style="text-align: left; display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 18px; border: {{m.ring}}; background: {{m.bg}}; cursor: pointer; color: #0F1419">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: {{m.dot}}; background: #FFFFFF; flex-shrink: 0; margin-top: 2px"></span>
+<span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 15px; font-weight: 700">{{m.title}}</span><span style="font-size: 13px; color: #536471; line-height: 1.45">{{m.sub}}</span></span></button></template></div>
+<template data-sc="if" value="{{isLogin}}" hint-placeholder-val="{{ false }}"><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 16px; border-radius: 18px; background: #F7F8F8">
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 1; min-width: 0">
+<label for="lgphone" style="font-size: 13.5px; font-weight: 700">Mobile number</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><span style="padding: 0 0 0 16px; color: #536471; font-size: 15px; font-weight: 600; white-space: nowrap">+94</span><input id="lgphone" type="tel" value="71 555 0182" placeholder="7X XXX XXXX" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div></div>
+<div style="display: flex; align-items: flex-end; gap: 10px"><button type="button" class="ek-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; box-sizing: border-box;  background: #0F1419; color: #FFFFFF; border: 1px solid #0F1419; flex: 1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Send OTP</span></button></div>
+<span style="grid-column: span 2; font-size: 13px; color: #536471">We’ll text a 6-digit code. Prefer a password? <a href="#">Log in with email</a></span></div></template>
+</section>
+<section aria-label="Shipping address" style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 26px">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px"><h2 style="margin: 0; font-size: 19px; font-weight: 800">Shipping address</h2><span style="font-size: 12.5px; color: #536471">All fields required unless marked</span></div>
+<form style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 1; min-width: 0">
+<label for="fn" style="font-size: 13.5px; font-weight: 700">Full name</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="fn" type="text" value="Nimal Perera" placeholder="As on your NIC" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 1; min-width: 0">
+<label for="ph" style="font-size: 13.5px; font-weight: 700">Mobile number</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><span style="padding: 0 0 0 16px; color: #536471; font-size: 15px; font-weight: 600; white-space: nowrap">+94</span><input id="ph" type="tel" value="71 555 0182" placeholder="7X XXX XXXX" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div><span style="font-size: 12px; color: #536471">For delivery updates via SMS / WhatsApp</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 2; min-width: 0">
+<label for="em" style="font-size: 13.5px; font-weight: 700">Email</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="em" type="email" value="nimal.p@example.com" placeholder="you@example.com" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div><span style="font-size: 12px; color: #536471">Your invoice and warranty card are emailed here</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 2; min-width: 0">
+<label for="a1" style="font-size: 13.5px; font-weight: 700">Address line 1</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="a1" type="text" value="No. 42/3, Havelock Road" placeholder="House no., street" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 2; min-width: 0">
+<label for="a2" style="font-size: 13.5px; font-weight: 700">Address line 2 (optional)</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="a2" type="text" placeholder="Apartment, landmark (e.g. near Majestic City)" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 1; min-width: 0">
+<label for="dist" style="font-size: 13.5px; font-weight: 700">District</label>
+<span style="position: relative; display: flex; align-items: center"><select id="dist" class="ek-field" onChange="{{setDistrict}}" style="appearance: none; width: 100%; padding: 13px 40px 13px 16px; border-radius: 14px; border: 1.5px solid #E1EAEF; background: #F7F9FA; font-size: 15px; color: #0F1419">
+<template data-sc="for" list="{{districts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.v}}</option></template></select>
+<span style="position: absolute; right: 14px; pointer-events: none; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m6 9 6 6 6-6"/></svg></span></span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 1; min-width: 0">
+<label for="city" style="font-size: 13.5px; font-weight: 700">City / Area</label>
+<span style="position: relative; display: flex; align-items: center"><select id="city" class="ek-field" onChange="{{setCity}}" style="appearance: none; width: 100%; padding: 13px 40px 13px 16px; border-radius: 14px; border: 1.5px solid #E1EAEF; background: #F7F9FA; font-size: 15px; color: #0F1419">
+<template data-sc="for" list="{{cities}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.v}}</option></template></select>
+<span style="position: absolute; right: 14px; pointer-events: none; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m6 9 6 6 6-6"/></svg></span></span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 1; min-width: 0">
+<label for="pc" style="font-size: 13.5px; font-weight: 700">Postal code</label>
+<div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="pc" type="text" value="00500" placeholder="e.g. 00500" class="ek-field" style="flex: 1; min-width: 0; padding: 13px 16px; border: none; background: transparent; font-size: 15px; color: #0F1419; border-radius: 14px"></div></div>
+<div style="grid-column: span 1"></div>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; grid-column: span 2"><input type="checkbox" checked style="position: absolute; opacity: 0; width: 1px; height: 1px"><span style="width: 20px; height: 20px; border-radius: 6px; background: #1E9DF1; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span>Save this address to my account</label><label style="display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; grid-column: span 2"><input type="checkbox" checked style="position: absolute; opacity: 0; width: 1px; height: 1px"><span style="width: 20px; height: 20px; border-radius: 6px; background: #1E9DF1; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 6 9 17l-5-5"/></svg></span>Billing address is the same as shipping</label>
+</form></section>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<a href="D-Cart.html" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m15 18-6-6 6-6"/></svg>Back to cart</a>
+<button type="button" class="ek-btn" onClick="{{toDelivery}}" style="display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; border: none; background: #1E9DF1; color: #FFFFFF; font-weight: 700; font-size: 16px; cursor: pointer">Continue to delivery<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m9 18 6-6-6-6"/></svg></button></div>
+</div></template><template data-sc="if" value="{{s1}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 20px">
+<section style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 26px; display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; flex-wrap: wrap">
+<div style="display: flex; gap: 14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><div><div style="font-size: 13px; color: #536471; font-weight: 700">SHIP TO</div><div style="font-size: 15px; font-weight: 700; margin-top: 2px">Nimal Perera · +94 71 555 0182</div><div style="font-size: 14px; color: #536471; margin-top: 2px">No. 42/3, Havelock Road, {{city}}, {{district}} 00500</div></div></div>
+<button type="button" onClick="{{toShipping}}" style="background: none; border: none; color: #0C6DB0; font-weight: 700; font-size: 14px; cursor: pointer">Change</button></section>
+<section aria-label="Delivery options" style="background: #FFFFFF; border: 1px solid #E1EAEF; border-radius: 21px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0 0 4px; font-size: 19px; font-weight: 800">Choose a delivery option</h2>
+<div role="radiogroup" style="display: flex; flex-direction: column; gap: 12px">
+<template data-sc="for" list="{{options}}" as="o" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{o.sel}}" onClick="{{o.pick}}" style="display: flex; gap: 14px; align-items: center; padding: 18px; border-radius: 18px; border: {{o.ring}}; background: {{o.bg}}; cursor: pointer; text-align: left; color: #0F1419">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: {{o.dot}}; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="width: 46px; height: 46px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E1EAEF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="{{o.icon}}" alt="" style="width: 26px; height: 26px"></span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 3px"><span style="font-size: 15.5px; font-weight: 700">{{o.title}}</span><span style="font-size: 13.5px; color: #536471">{{o.sub}}</span><span style="font-size: 13px; font-weight: 700; color: #00744D">{{o.eta}}</span></span>
+<span style="font-size: 15px; font-weight: 800; color: {{o.feeColor}}">{{o.fee}}</span></button></template></div>
+<label for="note" style="font-size: 13.5px; font-weight: 700; margin-top: 8px">Delivery instructions (optional)</label>
+<textarea id="note" class="ek-field" rows="3" placeholder="E.g. call on arrival, leave with security at the lobby" style="padding: 13px 16px; border-radius: 14px; border: 1.5px solid #E1EAEF; background: #F7F9FA; font-size: 14.5px; resize: vertical"></textarea>
+<span style="display: flex; gap: 8px; align-items: center; font-size: 13px; color: #536471"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>Rider will ask for a one-time code on delivery for phones above Rs. 100,000.</span></section>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<button type="button" onClick="{{toShipping}}" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: #0C6DB0; background: none; border: none; font-size: 15px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m15 18-6-6 6-6"/></svg>Back to shipping</button>
+<a href="D-Payment.html" class="ek-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #1E9DF1; color: #FFFFFF; font-weight: 700; font-size: 16px">Continue to payment<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m9 18 6-6-6-6"/></svg></a></div>
+</div></template></div><aside aria-label="Order summary" style="flex: 1 1 340px; max-width: 420px; position: sticky; top: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="background: #F7F8F8; border: 1px solid #E1EAEF; border-radius: 21px; padding: 22px">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px"><h2 style="margin: 0; font-size: 18px; font-weight: 800">Order summary</h2><a href="D-Cart.html" style="font-size: 13px; font-weight: 700">Edit cart</a></div>
+<div style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid #E1EAEF"><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/phone-blue.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Samsung Galaxy A55 5G (8GB / 256GB)</div><div style="font-size: 12px; color: #536471">Awesome Ice Blue</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 134,999</span></div><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/earbuds.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">JBL Tune Beam 2 ANC True Wireless Earbuds</div><div style="font-size: 12px; color: #536471">Black</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 24,990</span></div><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/powerbank.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">2</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Anker PowerCore 20,000mAh 22.5W Power Bank</div><div style="font-size: 12px; color: #536471">Black</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 24,980</span></div></div>
+
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 0; border-bottom: 1px solid #E1EAEF; font-size: 14px">
+<div style="display: flex; justify-content: space-between"><span style="color: #536471">Subtotal (4 items)</span><b>Rs. 184,969</b></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #536471">Coupon EKNEW2500</span><b style="color: #00744D">– Rs. 2,500</b></div>
+<div style="display: flex; justify-content: space-between"><span style="color: #536471">Delivery · {{delName}}</span><b style="color: {{delColor}}">{{delFee}}</b></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px"><span style="font-size: 16px; font-weight: 800">Total</span><span style="font-size: 24px; font-weight: 800">{{total}}</span></div>
+<div style="font-size: 12px; color: #536471; text-align: right">Incl. all taxes · LKR</div></div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 4px 6px"><span style="display: flex; gap: 10px; align-items: center; font-size: 13px; color: #536471"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>256-bit SSL encrypted checkout</span><span style="display: flex; gap: 10px; align-items: center; font-size: 13px; color: #536471"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Genuine products with official warranty</span><span style="display: flex; gap: 10px; align-items: center; font-size: 13px; color: #536471"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>7-day hassle-free returns</span></div></aside></div></div></main>
+</div>
+</template>
+
+<script src="js/react.production.min.js"></script>
+<script src="js/react-dom.production.min.js"></script>
+<script src="js/dc-export.js"></script>
+<script>
+(window.__defs || []).forEach(function (d) { DC.define(d[0], d[1]); });
+DC.mount(function (DCLogic) {
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { step: 0, mode: 'guest', district: 'Colombo', city: 'Colombo 05 (Havelock Town)', opt: 'std' }; }
+  renderVals() {
+    const S = this.state, set = (o) => this.setState(o);
+    const fmt = (n) => 'Rs. ' + n.toLocaleString('en-US');
+    const CITIES = {
+      Colombo: ['Colombo 01 (Fort)', 'Colombo 03 (Kollupitiya)', 'Colombo 04 (Bambalapitiya)', 'Colombo 05 (Havelock Town)', 'Colombo 06 (Wellawatte)', 'Colombo 07 (Cinnamon Gardens)', 'Dehiwala', 'Mount Lavinia', 'Nugegoda', 'Maharagama', 'Rajagiriya', 'Battaramulla', 'Kotte'],
+      Gampaha: ['Gampaha', 'Negombo', 'Ja-Ela', 'Wattala', 'Kadawatha', 'Kiribathgoda', 'Ragama', 'Minuwangoda'],
+      Kalutara: ['Kalutara', 'Panadura', 'Horana', 'Beruwala', 'Wadduwa'],
+      Kandy: ['Kandy', 'Peradeniya', 'Katugastota', 'Gampola', 'Kundasale'],
+      Galle: ['Galle', 'Hikkaduwa', 'Ambalangoda', 'Karapitiya'],
+      Matara: ['Matara', 'Weligama', 'Akuressa'],
+      Kurunegala: ['Kurunegala', 'Kuliyapitiya', 'Pannala', 'Narammala'],
+      Jaffna: ['Jaffna', 'Nallur', 'Chavakachcheri'],
+      Anuradhapura: ['Anuradhapura', 'Kekirawa', 'Medawachchiya'],
+      'Nuwara Eliya': ['Nuwara Eliya', 'Hatton', 'Talawakele'],
+    };
+    const isCol = S.district === 'Colombo';
+    const opts = [
+      { id: 'std', title: 'Standard delivery', sub: 'Islandwide via our courier partner, tracked by SMS', eta: isCol ? 'Arrives Wed 18 – Thu 19 Nov' : 'Arrives Thu 19 – Sat 21 Nov', fee: isCol ? 0 : 450, icon: 'assets/ic-truck.svg' },
+      { id: 'exp', title: 'Same-day express (Colombo & suburbs)', sub: 'Order before 12 noon · rider delivery', eta: isCol ? 'Today by 8:00 PM' : 'Not available for ' + S.district, fee: 750, icon: 'assets/ic-zap.svg', off: !isCol },
+      { id: 'pick', title: 'Store pickup, Kirula Road, Colombo 05', sub: 'Bring your NIC and order number', eta: 'Ready in 2 hours · Mon–Sat 9 AM – 7 PM', fee: 0, icon: 'assets/ic-store.svg' },
+    ];
+    const cur = opts.find((o) => o.id === S.opt && !o.off) || opts[0];
+    const ring = (on) => (on ? '2px solid #1E9DF1' : '1.5px solid #E1EAEF');
+    const sub = 184969, disc = 2500;
+    return {
+      s0: S.step === 0, s1: S.step === 1,
+      toDelivery: () => set({ step: 1 }), toShipping: () => set({ step: 0 }),
+      modes: [
+        { id: 'guest', title: 'Guest checkout', sub: 'No account needed. Track with order number + phone.' },
+        { id: 'login', title: 'Log in / Register', sub: 'Phone OTP login. Saved addresses and cards, faster checkout.' },
+      ].map((m) => ({ ...m, sel: String(S.mode === m.id), ring: ring(S.mode === m.id), bg: S.mode === m.id ? '#E3ECF6' : '#FFFFFF', dot: S.mode === m.id ? '6px solid #1E9DF1' : '1.5px solid #B9C4CE', pick: () => set({ mode: m.id }) })),
+      isLogin: S.mode === 'login',
+      districts: Object.keys(CITIES).map((d) => ({ v: d, sel: d === S.district })),
+      cities: (CITIES[S.district] || []).map((c) => ({ v: c, sel: c === S.city })),
+      setDistrict: (e) => { const d = e.target.value; set({ district: d, city: CITIES[d][0] }); },
+      setCity: (e) => set({ city: e.target.value }),
+      district: S.district, city: S.city,
+      options: opts.map((o) => ({ ...o, sel: String(cur.id === o.id), ring: o.off ? '1.5px dashed #E1EAEF' : ring(cur.id === o.id), bg: o.off ? '#F7F8F8' : cur.id === o.id ? '#E3ECF6' : '#FFFFFF', dot: cur.id === o.id ? '6px solid #1E9DF1' : '1.5px solid #B9C4CE', fee: o.fee === 0 ? 'FREE' : fmt(o.fee), feeColor: o.fee === 0 ? '#00744D' : '#0F1419', pick: () => { if (!o.off) set({ opt: o.id }); } })),
+      delName: cur.id === 'std' ? 'Standard' : cur.id === 'exp' ? 'Express' : 'Pickup',
+      delFee: cur.fee === 0 ? 'FREE' : fmt(cur.fee), delColor: cur.fee === 0 ? '#00744D' : '#0F1419',
+      total: fmt(sub - disc + cur.fee),
+    };
+  }
+}
+
+return Component; });
+</script>
+</body>
+</html>

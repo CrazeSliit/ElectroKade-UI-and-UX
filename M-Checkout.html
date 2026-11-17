@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout (mobile)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Open Sans', system-ui, sans-serif;color:#0F1419;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0C6DB0;text-decoration:none}a:hover{color:#0F1419}
+button,input,select,textarea{font-family:inherit}
+input::placeholder,textarea::placeholder{color:#7A8691}
+.ek-card{transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease}
+.ek-card:hover{box-shadow:0 10px 30px rgba(15,20,25,.08);transform:translateY(-2px);border-color:#CFDDE6}
+.ek-btn{transition:filter .15s ease, transform .15s ease}
+.ek-btn:hover{filter:brightness(.94)}.ek-btn:active{transform:scale(.98)}
+.ek-link:hover{color:#0C6DB0}
+.ek-field:focus{outline:none;border-color:#1E9DF1;box-shadow:0 0 0 3px rgba(30,157,241,.18)}
+@keyframes ekspin{to{transform:rotate(360deg)}}
+@keyframes ekpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+@keyframes ekdraw{to{stroke-dashoffset:0}}
+@keyframes ekshimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+@keyframes ekflip{from{opacity:.6}to{opacity:1}}
+</style>
+
+<style>
+body.desktop #app > div { min-height: 0 !important; }
+body.mobile { background: #E9EDF1; }
+body.mobile #app { width: 390px; margin: 24px auto 48px; background: #FFFFFF; border-radius: 36px; box-shadow: 0 30px 80px rgba(15,20,25,.18); transform: translateZ(0); overflow: clip; }
+body.mobile #app > div { min-height: 844px !important; }
+.ek-back { position: fixed; left: 16px; bottom: 16px; z-index: 9999; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #0F1419; color: #FFFFFF !important; font: 600 13px 'Open Sans', system-ui, sans-serif; text-decoration: none; box-shadow: 0 6px 20px rgba(15,20,25,.25); opacity: .85; }
+.ek-back:hover { opacity: 1; }
+@media (max-width: 430px) { body.mobile #app { margin: 0 auto; border-radius: 0; box-shadow: none; } .ek-back { display: none; } }
+</style>
+</head>
+<body class="mobile">
+<a class="ek-back" href="index.html">← All screens</a>
+<div id="app"></div>
+<template id="dc-root">
+<div style="width: 390px; min-height: 1900px; background: #FFFFFF; font-family: 'Open Sans', system-ui, sans-serif; color: #0F1419; position: relative; display: flex; flex-direction: column">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E1EAEF; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between">
+<a href="M-Cart.html" aria-label="Back to cart" style="width: 40px; height: 40px; border-radius: 999px; background: #F7F8F8; display: flex; align-items: center; justify-content: center; color: #0F1419"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m15 18-6-6 6-6"/></svg></a>
+<a href="home.html" aria-label="ElectroKade.lk home" style="display: flex; align-items: center; gap: 10px; flex-shrink: 0"><img src="assets/logo-icon.png" alt="" style="height: 30px; width: auto"><img src="assets/logo-word.png" alt="ElectroKade.lk" style="height: 15px; width: auto"></a><span style="display: inline-flex; align-items: center; gap: 4px; color: #00744D; font-size: 12px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00744D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure</span></header>
+<div style="border-bottom: 1px solid #E1EAEF; background: #F7F8F8">
+<button type="button" onClick="{{toggle}}" aria-expanded="{{openStr}}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: none; border: none; font-size: 14.5px; font-weight: 700; color: #0C6DB0">
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>{{label}}<span style="display: inline-flex; transform: {{rot}}; transition: transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0C6DB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m6 9 6 6 6-6"/></svg></span></span><b style="color: #0F1419; font-size: 16px">Rs. 182,469</b></button>
+<template data-sc="if" value="{{open}}" hint-placeholder-val="{{ false }}"><div style="padding: 0 16px 16px"><div style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid #E1EAEF"><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/phone-blue.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Samsung Galaxy A55 5G (8GB / 256GB)</div><div style="font-size: 12px; color: #536471">Awesome Ice Blue</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 134,999</span></div><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/earbuds.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">1</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">JBL Tune Beam 2 ANC True Wireless Earbuds</div><div style="font-size: 12px; color: #536471">Black</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 24,990</span></div><div style="display: flex; gap: 12px; align-items: center">
+<div style="position: relative; flex-shrink: 0"><div style="width: 56px; aspect-ratio: 1 / 1; background: #F7F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 7px; overflow: hidden"><img src="assets/powerbank.svg" alt="" style="width: 100%; height: 100%; object-fit: contain"></div><span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 999px; background: #0F1419; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">2</span></div>
+<div style="flex: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Anker PowerCore 20,000mAh 22.5W Power Bank</div><div style="font-size: 12px; color: #536471">Black</div></div>
+<span style="font-size: 13.5px; font-weight: 700; white-space: nowrap">Rs. 24,980</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 0; border-bottom: 1px solid #E1EAEF">
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #536471">Subtotal (4 items)</span><span style="font-weight: 600; color: #0F1419">Rs. 184,969</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #536471">Coupon EKNEW2500</span><span style="font-weight: 600; color: #00744D">– Rs. 2,500</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #536471">Delivery (Colombo 05)</span><span style="font-weight: 600; color: #00744D">FREE</span></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px"><span style="font-size: 16px; font-weight: 700">Total</span><span style="font-size: 22px; font-weight: 800">Rs. 182,469</span></div>
+<div style="font-size: 12px; color: #536471; text-align: right">Incl. all taxes · LKR</div></div></template></div>
+<div style="padding: 16px 16px 6px"><nav aria-label="Checkout progress" style="display: flex; align-items: center; gap: 6px"><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" aria-current="step"><span style="width: 28px; height: 28px; border-radius: 999px; background: #1E9DF1; border: 2px solid #1E9DF1; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">1</span><span style="font-size: 12px; font-weight: 700; color: #0F1419">Shipping</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">2</span><span style="font-size: 12px; font-weight: 600; color: #536471">Delivery</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">3</span><span style="font-size: 12px; font-weight: 600; color: #536471">Payment</span></div><div style="flex: 1; height: 2px; background: #E1EAEF; min-width: 16px; margin-top: -20px;"></div><div style="display: flex; align-items: center; gap: 8px; flex-direction: column;" ><span style="width: 28px; height: 28px; border-radius: 999px; background: #FFFFFF; border: 2px solid #E1EAEF; color: #536471; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">4</span><span style="font-size: 12px; font-weight: 600; color: #536471">Review</span></div></nav></div>
+<section style="padding: 12px 16px 0; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800">Checkout as</h2>
+<div style="display: flex; gap: 8px">
+<button type="button" aria-pressed="true" style="flex: 1; padding: 12px; border-radius: 16px; border: 2px solid #1E9DF1; background: #E3ECF6; text-align: left"><div style="font-size: 14px; font-weight: 800">Guest</div><div style="font-size: 12px; color: #536471">No account needed</div></button>
+<button type="button" aria-pressed="false" style="flex: 1; padding: 12px; border-radius: 16px; border: 1.5px solid #E1EAEF; background: #FFFFFF; text-align: left"><div style="font-size: 14px; font-weight: 800">Log in</div><div style="font-size: 12px; color: #536471">Phone OTP</div></button></div></section>
+<section style="padding: 20px 16px 0; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800">Shipping address</h2>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="mfullname" style="font-size: 13px; font-weight: 700">Full name</label><div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="mfullname" class="ek-field" value="Nimal Perera" placeholder="" style="flex: 1; min-width: 0; padding: 13px 14px; border: none; background: transparent; font-size: 16px; border-radius: 14px"></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="mmobilenumb" style="font-size: 13px; font-weight: 700">Mobile number</label><div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><span style="padding-left: 14px; color: #536471; font-weight: 600">+94</span><input id="mmobilenumb" class="ek-field" value="71 555 0182" placeholder="" style="flex: 1; min-width: 0; padding: 13px 14px; border: none; background: transparent; font-size: 16px; border-radius: 14px"></div><span style="font-size: 12px; color: #536471">For delivery updates via SMS / WhatsApp</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="memail" style="font-size: 13px; font-weight: 700">Email</label><div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="memail" class="ek-field" value="nimal.p@example.com" placeholder="" style="flex: 1; min-width: 0; padding: 13px 14px; border: none; background: transparent; font-size: 16px; border-radius: 14px"></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="maddresslin" style="font-size: 13px; font-weight: 700">Address line 1</label><div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="maddresslin" class="ek-field" value="No. 42/3, Havelock Road" placeholder="" style="flex: 1; min-width: 0; padding: 13px 14px; border: none; background: transparent; font-size: 16px; border-radius: 14px"></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="maddresslin" style="font-size: 13px; font-weight: 700">Address line 2 (optional)</label><div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="maddresslin" class="ek-field" value="" placeholder="Apartment, landmark" style="flex: 1; min-width: 0; padding: 13px 14px; border: none; background: transparent; font-size: 16px; border-radius: 14px"></div></div>
+<div style="display: flex; gap: 10px"><div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0"><label for="msdistrict" style="font-size: 13px; font-weight: 700">District</label><span style="position: relative; display: flex; align-items: center"><select id="msdistrict" class="ek-field" style="appearance: none; width: 100%; padding: 13px 36px 13px 14px; border-radius: 14px; border: 1.5px solid #E1EAEF; background: #F7F9FA; font-size: 15px"><option>Colombo</option></select><span style="position: absolute; right: 12px; pointer-events: none; display: flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m6 9 6 6 6-6"/></svg></span></span></div><div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0"><label for="mscityarea" style="font-size: 13px; font-weight: 700">City / Area</label><span style="position: relative; display: flex; align-items: center"><select id="mscityarea" class="ek-field" style="appearance: none; width: 100%; padding: 13px 36px 13px 14px; border-radius: 14px; border: 1.5px solid #E1EAEF; background: #F7F9FA; font-size: 15px"><option>Colombo 05</option></select><span style="position: absolute; right: 12px; pointer-events: none; display: flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m6 9 6 6 6-6"/></svg></span></span></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="mpostalcode" style="font-size: 13px; font-weight: 700">Postal code</label><div style="display: flex; align-items: center; background: #F7F9FA; border: 1.5px solid #E1EAEF; border-radius: 14px"><input id="mpostalcode" class="ek-field" value="00500" placeholder="" style="flex: 1; min-width: 0; padding: 13px 14px; border: none; background: transparent; font-size: 16px; border-radius: 14px"></div></div>
+<label style="display: flex; gap: 10px; align-items: center; font-size: 14px"><input type="checkbox" checked style="width: 20px; height: 20px; accent-color: #1E9DF1">Save address for next time</label></section>
+<section style="padding: 22px 16px 0; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800">Delivery</h2>
+<button type="button" role="radio" aria-checked="true" style="display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 18px; border: 2px solid #1E9DF1; background: #E3ECF6; text-align: left; width: 100%">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: 6px solid #1E9DF1; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14.5px; font-weight: 700">Standard delivery</span><span style="font-size: 12.5px; color: #536471">Islandwide courier, SMS tracking</span><span style="font-size: 12.5px; font-weight: 700; color: #00744D">Arrives Wed 18 – Thu 19 Nov</span></span>
+<b style="font-size: 14px; color: #00744D">FREE</b></button>
+<button type="button" role="radio" aria-checked="false" style="display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 18px; border: 1.5px solid #E1EAEF; background: #FFFFFF; text-align: left; width: 100%">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: 1.5px solid #B9C4CE; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14.5px; font-weight: 700">Same-day express</span><span style="font-size: 12.5px; color: #536471">Colombo & suburbs · before 12 noon</span><span style="font-size: 12.5px; font-weight: 700; color: #00744D">Today by 8:00 PM</span></span>
+<b style="font-size: 14px; color: #0F1419">Rs. 750</b></button>
+<button type="button" role="radio" aria-checked="false" style="display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 18px; border: 1.5px solid #E1EAEF; background: #FFFFFF; text-align: left; width: 100%">
+<span style="width: 20px; height: 20px; border-radius: 999px; border: 1.5px solid #B9C4CE; background: #FFFFFF; flex-shrink: 0"></span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14.5px; font-weight: 700">Store pickup, Colombo 05</span><span style="font-size: 12.5px; color: #536471">Kirula Road · bring your NIC</span><span style="font-size: 12.5px; font-weight: 700; color: #00744D">Ready in 2 hours</span></span>
+<b style="font-size: 14px; color: #00744D">FREE</b></button></section>
+<div style="flex: 1; min-height: 24px"></div>
+<div style="position: sticky; bottom: 0; z-index: 35; background: #FFFFFF; border-top: 1px solid #E1EAEF; padding: 12px 16px 24px">
+<a href="M-Payment.html" class="ek-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 999px; background: #1E9DF1; color: #FFFFFF; font-weight: 700; font-size: 16px">Continue to payment<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m9 18 6-6-6-6"/></svg></a></div>
+</div>
+</template>
+
+<script src="js/react.production.min.js"></script>
+<script src="js/react-dom.production.min.js"></script>
+<script src="js/dc-export.js"></script>
+<script>
+(window.__defs || []).forEach(function (d) { DC.define(d[0], d[1]); });
+DC.mount(function (DCLogic) {
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { open: false }; }
+  renderVals() { const o = this.state.open; return { open: o, openStr: String(o), toggle: () => this.setState({ open: !o }), label: o ? 'Hide order summary' : 'Show order summary (4)', rot: o ? 'rotate(180deg)' : 'rotate(0deg)' }; }
+}
+
+return Component; });
+</script>
+</body>
+</html>

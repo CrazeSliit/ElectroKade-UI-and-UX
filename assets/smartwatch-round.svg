@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+<defs><linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C3138"/><stop offset="1" stop-color="#14171B"/></linearGradient><linearGradient id="case" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5A616B"/><stop offset="1" stop-color="#1B1E23"/></linearGradient>
+<radialGradient id="sh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#0F1419" stop-opacity=".22"/><stop offset="1" stop-color="#0F1419" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="200" cy="356" rx="130" ry="14" fill="url(#sh)"/>
+<rect x="150" y="20" width="100" height="120" rx="20" fill="url(#band)"/>
+<rect x="150" y="270" width="100" height="110" rx="20" fill="url(#band)"/>
+<circle cx="200" cy="205" r="96" fill="url(#case)"/>
+<rect x="290" y="186" width="10" height="38" rx="5" fill="#3D434B"/>
+<circle cx="200" cy="205" r="82" fill="#05070A"/>
+<circle cx="200" cy="205" r="62" fill="none" stroke="#1E9DF1" stroke-opacity=".22" stroke-width="7"/><circle cx="200" cy="205" r="62" fill="none" stroke="#1E9DF1" stroke-width="7" stroke-linecap="round" stroke-dasharray="272.7 999" transform="rotate(-90 200 205)"/><circle cx="200" cy="205" r="48" fill="none" stroke="#17BF63" stroke-opacity=".22" stroke-width="7"/><circle cx="200" cy="205" r="48" fill="none" stroke="#17BF63" stroke-width="7" stroke-linecap="round" stroke-dasharray="150.8 999" transform="rotate(-90 200 205)"/>
+<text x="200" y="202" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">10:09</text>
+<text x="200" y="222" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="10" fill="#9AA4AE">8,240 steps</text>
+</svg>

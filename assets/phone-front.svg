@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+<defs><linearGradient id="w1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E9DF1"/><stop offset="1" stop-color="#0F1419"/></linearGradient><linearGradient id="w2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC8FF"/><stop offset="1" stop-color="#1E9DF1"/></linearGradient><clipPath id="sc"><rect x="131" y="43" width="138" height="294" rx="22"/></clipPath>
+<radialGradient id="sh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#0F1419" stop-opacity=".22"/><stop offset="1" stop-color="#0F1419" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="200" cy="356" rx="130" ry="14" fill="url(#sh)"/>
+<rect x="122" y="34" width="156" height="312" rx="30" fill="#2A2F36"/>
+<rect x="126" y="38" width="148" height="304" rx="26" fill="#0B0D10"/>
+<g clip-path="url(#sc)"><rect x="131" y="43" width="138" height="294" fill="url(#w1)"/>
+<path d="M131 210 C 170 170 220 250 269 200 L269 337 L131 337 Z" fill="url(#w2)" opacity=".85"/>
+<path d="M131 260 C 180 230 220 300 269 262 L269 337 L131 337 Z" fill="#0F1419" opacity=".45"/>
+<text x="200" y="118" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="40" font-weight="300" fill="#FFFFFF">10:09</text>
+<text x="200" y="138" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="10" fill="#DCEEFF">Tue, 17 November</text></g>
+<circle cx="200" cy="54" r="5" fill="#000"/>
+</svg>
