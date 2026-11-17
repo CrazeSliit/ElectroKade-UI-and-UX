@@ -1,0 +1,60 @@
+/* ElectroKade.lk — page transitions & motion layer.
+   Uses individual `translate`/`scale` properties so it composes with the
+   inline `transform`s and the existing .ek-card hover lift. */
+
+:root {
+  --ek-ease-out: cubic-bezier(.22, .8, .24, 1);
+  --ek-ease-in: cubic-bezier(.4, 0, 1, 1);
+}
+
+/* Native cross-document transitions where the browser supports them (served over http/https). */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: ek-vt-out .22s var(--ek-ease-in) both; }
+::view-transition-new(root) { animation: ek-vt-in .42s var(--ek-ease-out) both; }
+@keyframes ek-vt-out { to { opacity: 0; translate: 0 -8px; } }
+@keyframes ek-vt-in { from { opacity: 0; translate: 0 14px; } }
+
+/* ---------- Page enter ---------- */
+html.ek-enter #app { animation: ek-page-in .5s var(--ek-ease-out) backwards; }
+@keyframes ek-page-in { from { opacity: 0; translate: 0 14px; } }
+
+/* ---------- Page leave ---------- */
+html.ek-leaving #app {
+  animation: none;
+  opacity: 0; translate: 0 -8px;
+  transition: opacity .22s var(--ek-ease-in), translate .22s var(--ek-ease-in);
+  pointer-events: none;
+}
+
+/* Top progress bar shown while leaving */
+.ek-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 100000;
+  background: linear-gradient(90deg, #1E9DF1, #7CC8FF);
+  transform-origin: 0 50%; transform: scaleX(0); opacity: 0; pointer-events: none;
+}
+html.ek-leaving .ek-progress { opacity: 1; animation: ek-progress 1.4s cubic-bezier(.1, .7, .2, 1) forwards; }
+@keyframes ek-progress { from { transform: scaleX(0); } to { transform: scaleX(.9); } }
+
+/* ---------- Scroll reveal ---------- */
+html.ek-motion .ek-rv:not(.ek-in) { opacity: 0; translate: 0 22px; }
+html.ek-motion .ek-rv {
+  transition: opacity .6s var(--ek-ease-out), translate .6s var(--ek-ease-out),
+              box-shadow .2s ease, transform .2s ease, border-color .2s ease, filter .15s ease;
+}
+html.ek-motion .ek-rv.ek-rv-scale:not(.ek-in) { translate: none; scale: .96; }
+html.ek-motion .ek-rv.ek-rv-scale { transition-property: opacity, scale, box-shadow, transform, border-color, filter; }
+
+/* ---------- Micro-interactions ---------- */
+.ek-card img { transition: scale .45s var(--ek-ease-out); }
+.ek-card:hover img { scale: 1.05; }
+.ek-btn:active { transform: scale(.96); }
+.ek-pop { animation: ek-pop .45s var(--ek-ease-out); }
+@keyframes ek-pop { 0% { scale: 1; } 35% { scale: 1.25; } 100% { scale: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  html.ek-enter #app { animation: none; }
+  html.ek-motion .ek-rv:not(.ek-in) { opacity: 1; translate: none; scale: none; }
+  html.ek-leaving #app { transition: none; opacity: 1; translate: none; }
+  .ek-card:hover img { scale: none; }
+}
