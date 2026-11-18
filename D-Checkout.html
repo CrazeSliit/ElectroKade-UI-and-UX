@@ -173,8 +173,8 @@ class Component extends DCLogic {
     };
     const isCol = S.district === 'Colombo';
     const opts = [
-      { id: 'std', title: 'Standard delivery', sub: 'Islandwide via our courier partner, tracked by SMS', eta: isCol ? 'Arrives Wed 18 – Thu 19 Nov' : 'Arrives Thu 19 – Sat 21 Nov', fee: isCol ? 0 : 450, icon: 'assets/ic-truck.svg' },
-      { id: 'exp', title: 'Same-day express (Colombo & suburbs)', sub: 'Order before 12 noon · rider delivery', eta: isCol ? 'Today by 8:00 PM' : 'Not available for ' + S.district, fee: 750, icon: 'assets/ic-zap.svg', off: !isCol },
+      { id: 'std', title: 'Standard delivery', sub: 'Islandwide via our courier partner, tracked by SMS', eta: isCol ? 'Arrives Wed 18 – Thu 19 Nov' : 'Arrives Thu 19 – Sat 21 Nov', fee: 350, icon: 'assets/ic-truck.svg' },
+      { id: 'exp', title: 'Same-day express (Colombo & suburbs)', sub: 'Order before 12 noon · rider delivery', eta: isCol ? 'Today by 8:00 PM' : 'Not available for ' + S.district, fee: 2500, icon: 'assets/ic-zap.svg', off: !isCol },
       { id: 'pick', title: 'Store pickup, Kirula Road, Colombo 05', sub: 'Bring your NIC and order number', eta: 'Ready in 2 hours · Mon–Sat 9 AM – 7 PM', fee: 0, icon: 'assets/ic-store.svg' },
     ];
     const cur = opts.find((o) => o.id === S.opt && !o.off) || opts[0];
