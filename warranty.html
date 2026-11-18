@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warranty QR — ElectroKade.lk</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/ek-warranty.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Open Sans',system-ui,sans-serif;color:#0F1419;background:#F7F9FA;-webkit-font-smoothing:antialiased}
+a{color:#0C6DB0;text-decoration:none}a:hover{color:#0F1419}
+.top{background:#FFFFFF;border-bottom:1px solid #E1EAEF}
+.top-in{max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img:first-child{height:40px}.brand img:last-child{height:20px}
+.top a.back{font-size:14px;font-weight:700}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 64px}
+.panel{background:#FFFFFF;border:1px solid #E1EAEF;border-radius:24px;padding:32px;max-width:520px;margin:0 auto}
+.panel.wide{max-width:none}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.08em;color:#00875A}
+h1{margin:6px 0 8px;font-size:28px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.lead{margin:0 0 24px;font-size:15px;color:#536471;line-height:1.6}
+label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
+.phone{display:flex;align-items:center;border:1.5px solid #E1EAEF;border-radius:14px;background:#FFFFFF;overflow:hidden}
+.phone:focus-within{border-color:#1E9DF1;box-shadow:0 0 0 3px rgba(30,157,241,.18)}
+.phone span{padding:0 4px 0 16px;font-weight:700;color:#536471}
+.phone input{flex:1;border:none;outline:none;padding:14px 16px 14px 6px;font:600 17px 'Open Sans',system-ui,sans-serif;letter-spacing:.02em;min-width:0}
+.otp{display:flex;gap:10px;justify-content:space-between}
+.otp input{width:100%;max-width:56px;aspect-ratio:1/1.15;text-align:center;font:800 24px Menlo,Consolas,monospace;border:1.5px solid #E1EAEF;border-radius:14px;outline:none;color:#0F1419;background:#FFFFFF}
+.otp input:focus{border-color:#1E9DF1;box-shadow:0 0 0 3px rgba(30,157,241,.18)}
+.otp.is-bad input{border-color:#E0493E}
+.err{min-height:20px;margin:10px 0 0;font-size:13.5px;color:#B42318;font-weight:600}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap;font-size:13.5px;color:#536471}
+.full{width:100%;margin-top:18px}
+.steps{display:flex;gap:6px;margin-bottom:22px}
+.steps i{flex:1;height:4px;border-radius:4px;background:#E1EAEF}
+.steps i.on{background:#1E9DF1}
+.note{margin-top:22px;font-size:12.5px;color:#7A8691;line-height:1.55;display:flex;gap:8px}
+.note svg{flex-shrink:0;color:#00B87A;margin-top:1px}
+.results-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.results-head h1{margin-bottom:4px}
+.empty{text-align:center;padding:24px 0;color:#536471}
+/* verify view */
+.verify{max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #E1EAEF;border-radius:24px;overflow:hidden}
+.v-top{padding:28px 32px;color:#FFFFFF;display:flex;align-items:center;gap:16px}
+.v-top.ok{background:#00875A}.v-top.exp{background:#B54708}.v-top.bad{background:#B42318}
+.v-top .ico{width:52px;height:52px;border-radius:999px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.v-top h1{margin:0;font-size:22px}.v-top p{margin:2px 0 0;font-size:14px;opacity:.9}
+.v-body{padding:28px 32px;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.v-body .ekw-qr{width:150px;height:150px}
+.v-body dl{flex:1;min-width:220px;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:14px}
+.v-body dt{color:#536471}.v-body dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.v-foot{padding:0 32px 28px;display:flex;gap:10px;flex-wrap:wrap}
+[hidden]{display:none!important}
+@media (max-width:560px){
+  .panel{padding:24px 20px;border-radius:20px}
+  h1{font-size:23px}
+  .otp{gap:6px}
+  .v-top,.v-body,.v-foot{padding-left:20px;padding-right:20px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a href="home.html" class="brand" aria-label="ElectroKade.lk home"><img src="assets/logo-icon.png" alt=""><img src="assets/logo-word.png" alt="ElectroKade.lk"></a>
+  <a href="home.html" class="back">← Back to shop</a>
+</div></header>
+
+<main>
+  <!-- Verify view: opened by scanning a warranty QR -->
+  <section id="verify" hidden></section>
+
+  <!-- Recovery view -->
+  <section id="recover">
+    <div class="panel" id="step-phone">
+      <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+      <span class="eyebrow">LOST YOUR WARRANTY QR?</span>
+      <h1>Get your warranty QR back</h1>
+      <p class="lead">Enter the mobile number you used at checkout. We’ll text you a 6-digit code, then show every warranty QR registered to that number.</p>
+      <form id="phone-form" novalidate>
+        <label for="phone">Mobile number</label>
+        <div class="phone"><span>🇱🇰</span><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="071 555 0182" required></div>
+        <p class="err" id="phone-err" role="alert"></p>
+        <button type="submit" class="ekw-btn ekw-btn-blue full" id="send-btn">Send code</button>
+      </form>
+      <div class="note"><span id="shield-1"></span><span>Your warranty is tied to your phone number, so you can recover the QR any time during the warranty period, even without your invoice.</span></div>
+    </div>
+
+    <div class="panel" id="step-otp" hidden>
+      <div class="steps" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div>
+      <span class="eyebrow">VERIFY IT’S YOU</span>
+      <h1>Enter the 6-digit code</h1>
+      <p class="lead">If <b id="otp-phone"></b> has warranties with us, we’ve sent a code to it. The code expires in 5 minutes.</p>
+      <form id="otp-form" novalidate>
+        <div class="otp" id="otp-boxes" role="group" aria-label="6-digit code">
+          <input inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 2">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 3">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 4">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 5">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 6">
+        </div>
+        <p class="err" id="otp-err" role="alert"></p>
+        <button type="submit" class="ekw-btn ekw-btn-blue full" id="verify-btn" disabled>Verify &amp; show my QR</button>
+      </form>
+      <div class="row">
+        <button type="button" class="ekw-btn ekw-btn-link" id="change-btn">Change number</button>
+        <span><button type="button" class="ekw-btn ekw-btn-link" id="resend-btn" disabled>Resend code</button> <span id="resend-timer"></span></span>
+      </div>
+    </div>
+
+    <div class="panel wide" id="step-results" hidden>
+      <div class="results-head">
+        <div>
+          <span class="eyebrow">VERIFIED</span>
+          <h1 id="results-title">Your warranty QR cards</h1>
+          <p class="lead" style="margin:0">Download them again and keep a copy on your phone. Old QR codes stay valid.</p>
+        </div>
+        <button type="button" class="ekw-btn ekw-btn-ghost" id="done-btn">Done</button>
+      </div>
+      <div class="ekw-grid" id="results"></div>
+    </div>
+  </section>
+</main>
+
+<script src="js/qrcode.min.js"></script>
+<script src="js/ek-warranty.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var params = new URLSearchParams(location.search);
+  $('shield-1').innerHTML = EKW.ICON_SHIELD;
+
+  /* ---------- verify view (QR scanned) ---------- */
+  if (params.get('d')) {
+    $('recover').hidden = true;
+    var v = $('verify'); v.hidden = false;
+    var res = EKW.decode(params.get('d'), params.get('c') || '');
+    var check = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    var cross = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    if (!res.ok) {
+      v.innerHTML = '<div class="verify"><div class="v-top bad"><span class="ico">' + cross + '</span><div><h1>Not a valid warranty QR</h1><p>This code was damaged or altered. Please contact ElectroKade support.</p></div></div>' +
+        '<div class="v-foot" style="padding-top:24px"><a class="ekw-btn ekw-btn-dark" href="warranty.html">Recover my warranty QR</a></div></div>';
+      return;
+    }
+    var w = res.w, st = EKW.status(w);
+    var cls = st.active ? 'ok' : 'exp';
+    var head = st.active
+      ? '<h1>Warranty active</h1><p>' + st.daysLeft + ' day' + (st.daysLeft === 1 ? '' : 's') + ' remaining · genuine ElectroKade purchase</p>'
+      : '<h1>Warranty expired</h1><p>Expired on ' + EKW.fmtDate(st.expires) + '. Paid repairs are still available.</p>';
+    v.innerHTML = '<div class="verify">' +
+      '<div class="v-top ' + cls + '"><span class="ico">' + (st.active ? check : cross) + '</span><div>' + head + '</div></div>' +
+      '<div class="v-body"><div class="ekw-qr" id="vqr" role="img" aria-label="Warranty QR code"></div><dl>' +
+        '<dt>Product</dt><dd>' + EKW.esc(w.product) + (w.variant ? '<br><span style="font-weight:400;color:#536471">' + EKW.esc(w.variant) + '</span>' : '') + '</dd>' +
+        '<dt>Serial no.</dt><dd class="ekw-mono">' + EKW.esc(w.serial) + '</dd>' +
+        '<dt>Warranty ID</dt><dd class="ekw-mono">' + EKW.esc(w.id) + '</dd>' +
+        '<dt>Order</dt><dd class="ekw-mono">' + EKW.esc(w.orderNo) + '</dd>' +
+        '<dt>Owner</dt><dd>' + EKW.esc(w.customer) + '</dd>' +
+        '<dt>Coverage</dt><dd>' + w.months + ' months · ' + EKW.fmtDate(w.start) + ' – ' + EKW.fmtDate(st.expires) + '</dd>' +
+      '</dl></div>' +
+      '<div class="v-foot"><button type="button" class="ekw-btn ekw-btn-dark" id="vdl">Download card</button><a class="ekw-btn ekw-btn-ghost" href="home.html">Visit ElectroKade.lk</a></div>' +
+    '</div>';
+    EKW.renderQR($('vqr'), location.href, 150);
+    $('vdl').addEventListener('click', function () { EKW.downloadCard(w); });
+    return;
+  }
+
+  /* ---------- recovery flow ---------- */
+  var phone = null, timer = null;
+  var boxes = Array.prototype.slice.call($('otp-boxes').querySelectorAll('input'));
+
+  function show(step) {
+    ['step-phone', 'step-otp', 'step-results'].forEach(function (s) { $(s).hidden = s !== step; });
+    window.scrollTo(0, 0);
+  }
+  function startTimer(sec) {
+    clearInterval(timer);
+    var btn = $('resend-btn'), lbl = $('resend-timer');
+    btn.disabled = true;
+    var tick = function () {
+      if (sec <= 0) { clearInterval(timer); btn.disabled = false; lbl.textContent = ''; return; }
+      lbl.textContent = 'in 0:' + (sec < 10 ? '0' : '') + sec;
+      sec--;
+    };
+    tick(); timer = setInterval(tick, 1000);
+  }
+  function code() { return boxes.map(function (b) { return b.value; }).join(''); }
+  function clearBoxes() { boxes.forEach(function (b) { b.value = ''; }); $('verify-btn').disabled = true; }
+
+  $('phone-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var r = EKW.sendOtp($('phone').value);
+    if (!r.ok && !r.retryIn) { $('phone-err').textContent = r.error; $('phone').focus(); return; }
+    $('phone-err').textContent = '';
+    phone = r.phone || EKW.normPhone($('phone').value);
+    $('otp-phone').textContent = EKW.maskPhone(phone);
+    $('otp-err').textContent = '';
+    clearBoxes();
+    show('step-otp');
+    startTimer(r.retryIn || 30);
+    boxes[0].focus();
+  });
+
+  boxes.forEach(function (b, i) {
+    b.addEventListener('input', function () {
+      var d = b.value.replace(/\D/g, '');
+      if (d.length > 1) {               // pasted or autofilled the whole code
+        d.slice(0, 6 - i).split('').forEach(function (ch, k) { boxes[i + k].value = ch; });
+        boxes[Math.min(i + d.length, 5)].focus();
+      } else {
+        b.value = d;
+        if (d && i < 5) boxes[i + 1].focus();
+      }
+      $('otp-boxes').classList.remove('is-bad');
+      $('otp-err').textContent = '';
+      $('verify-btn').disabled = code().length !== 6;
+      if (code().length === 6) $('otp-form').requestSubmit();
+    });
+    b.addEventListener('keydown', function (e) {
+      if (e.key === 'Backspace' && !b.value && i > 0) { boxes[i - 1].focus(); boxes[i - 1].value = ''; e.preventDefault(); }
+      if (e.key === 'ArrowLeft' && i > 0) boxes[i - 1].focus();
+      if (e.key === 'ArrowRight' && i < 5) boxes[i + 1].focus();
+    });
+    b.addEventListener('focus', function () { b.select(); });
+  });
+
+  $('otp-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (code().length !== 6) return;
+    var r = EKW.verifyOtp(phone, code());
+    if (!r.ok) {
+      $('otp-err').textContent = r.error;
+      $('otp-boxes').classList.add('is-bad');
+      clearBoxes(); boxes[0].focus();
+      return;
+    }
+    clearInterval(timer);
+    var list = r.warranties, out = $('results');
+    $('results-title').textContent = list.length ? 'Your warranty QR cards (' + list.length + ')' : 'No warranties found';
+    if (list.length) { out.innerHTML = EKW.cardsHTML(list); EKW.hydrateCards(out, list); }
+    else out.innerHTML = '<p class="empty">We couldn’t find any warranties for ' + EKW.esc(EKW.fmtPhone(phone)) + '. Try the number you used at checkout, or WhatsApp us on +94 77 123 4567.</p>';
+    show('step-results');
+  });
+
+  $('resend-btn').addEventListener('click', function () {
+    var r = EKW.sendOtp(phone);
+    if (!r.ok) { $('otp-err').textContent = r.error; if (r.retryIn) startTimer(r.retryIn); return; }
+    $('otp-err').textContent = 'A new code is on its way.';
+    $('otp-err').style.color = '#00875A';
+    setTimeout(function () { $('otp-err').style.color = ''; }, 3000);
+    clearBoxes(); startTimer(r.retryIn); boxes[0].focus();
+  });
+  $('change-btn').addEventListener('click', function () { clearInterval(timer); show('step-phone'); $('phone').focus(); });
+  $('done-btn').addEventListener('click', function () { location.href = 'home.html'; });
+})();
+</script>
+</body>
+</html>
