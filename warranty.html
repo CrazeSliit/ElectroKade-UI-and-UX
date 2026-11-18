@@ -34,6 +34,10 @@ label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
 .otp input{width:100%;max-width:56px;aspect-ratio:1/1.15;text-align:center;font:800 24px Menlo,Consolas,monospace;border:1.5px solid #E1EAEF;border-radius:14px;outline:none;color:#0F1419;background:#FFFFFF}
 .otp input:focus{border-color:#1E9DF1;box-shadow:0 0 0 3px rgba(30,157,241,.18)}
 .otp.is-bad input{border-color:#E0493E}
+.demo-otp{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 20px;padding:12px 16px;border:1.5px dashed #F5B83D;border-radius:14px;background:#FFF8E6;font-size:13.5px;color:#7A4B00}
+.demo-otp b{display:block;font-size:11.5px;letter-spacing:.08em;font-weight:800}
+.demo-otp code{font:800 22px Menlo,Consolas,monospace;letter-spacing:.18em;color:#0F1419}
+.demo-otp button{border:none;background:#0F1419;color:#FFFFFF;font:700 13px 'Open Sans',system-ui,sans-serif;padding:8px 14px;border-radius:999px;cursor:pointer}
 .err{min-height:20px;margin:10px 0 0;font-size:13.5px;color:#B42318;font-weight:600}
 .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap;font-size:13.5px;color:#536471}
 .full{width:100%;margin-top:18px}
@@ -96,6 +100,10 @@ label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
       <span class="eyebrow">VERIFY IT’S YOU</span>
       <h1>Enter the 6-digit code</h1>
       <p class="lead">If <b id="otp-phone"></b> has warranties with us, we’ve sent a code to it. The code expires in 5 minutes.</p>
+      <div class="demo-otp" id="demo-otp" hidden>
+        <div><b>DEMO OTP</b><code id="demo-code"></code></div>
+        <button type="button" id="demo-fill">Fill code</button>
+      </div>
       <form id="otp-form" novalidate>
         <div class="otp" id="otp-boxes" role="group" aria-label="6-digit code">
           <input inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1">
@@ -191,6 +199,12 @@ label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
   }
   function code() { return boxes.map(function (b) { return b.value; }).join(''); }
   function clearBoxes() { boxes.forEach(function (b) { b.value = ''; }); $('verify-btn').disabled = true; }
+  function showDemo(c) { $('demo-code').textContent = c || ''; $('demo-otp').hidden = !c; }
+  $('demo-fill').addEventListener('click', function () {
+    var c = $('demo-code').textContent;
+    boxes.forEach(function (b, i) { b.value = c[i] || ''; });
+    $('otp-form').requestSubmit();
+  });
 
   $('phone-form').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -201,6 +215,7 @@ label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
     $('otp-phone').textContent = EKW.maskPhone(phone);
     $('otp-err').textContent = '';
     clearBoxes();
+    if (r.demoCode) showDemo(r.demoCode);
     show('step-otp');
     startTimer(r.retryIn || 30);
     boxes[0].focus();
@@ -250,6 +265,7 @@ label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px}
   $('resend-btn').addEventListener('click', function () {
     var r = EKW.sendOtp(phone);
     if (!r.ok) { $('otp-err').textContent = r.error; if (r.retryIn) startTimer(r.retryIn); return; }
+    showDemo(r.demoCode);
     $('otp-err').textContent = 'A new code is on its way.';
     $('otp-err').style.color = '#00875A';
     setTimeout(function () { $('otp-err').style.color = ''; }, 3000);

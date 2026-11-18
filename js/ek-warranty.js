@@ -160,7 +160,8 @@
     var text = 'ElectroKade: ' + code + ' is your code to recover your warranty QR. It expires in 5 minutes. Never share this code.';
     if (has) EKW.smsSender(p, text, code);
     else EKW.smsSender(p, null, null);
-    return { ok: true, phone: p, retryIn: OTP_RESEND / 1000 };
+    // demoCode is for the front-end demo only — never return the code from a real backend.
+    return { ok: true, phone: p, retryIn: OTP_RESEND / 1000, demoCode: code };
   }
 
   // Returns { ok, warranties, error, triesLeft }.
